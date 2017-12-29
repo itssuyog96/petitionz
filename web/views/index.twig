@@ -1,57 +1,439 @@
-{% extends "layout.html" %}
-
+{% extends 'layout.html'%}
 {% block content %}
-<div class="jumbotron text-center">
-  <div class="container">
-    <a href="/" class="lang-logo">
-      <img src="/images/lang-logo.png">
-    </a>
-    <h1>Getting Started with PHP on Heroku</h1>
-    <p>This is a sample PHP application deployed to Heroku. It's a reasonably simple app - but a good foundation for understanding how to get the most out of the Heroku platform.</p>
-    <a type="button" class="btn btn-lg btn-default" href="https://devcenter.heroku.com/articles/getting-started-with-php"><span class="glyphicon glyphicon-flash"></span> Getting Started with PHP</a>
-    <a type="button" class="btn btn-lg btn-primary" href="https://github.com/heroku/php-getting-started"><span class="glyphicon glyphicon-download"></span> Source on GitHub</a>
-  </div>
-</div>
-<div class="container">
-  <div class="alert alert-info text-center" role="alert">
-    To deploy your own copy, and learn the fundamentals of the Heroku platform, head over to the <a href="https://devcenter.heroku.com/articles/getting-started-with-php" class="alert-link">Getting Started with PHP on Heroku</a> tutorial.
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-info-sign"></span> How this sample app works</h3>
-      <ul>
-        <li>This app was deployed to Heroku, either using Git or by using <a href="https://github.com/heroku/php-getting-started">Heroku Button</a> on the repository.</li>
+    <div id="main-carousel" class="owl-carousel owl-theme">
+        <div class="slideritem slider-one text-center item active">
+            <div class="container-fluid">
+                <div class="featured-image hidden-sm hidden-xs">
+                </div>
+                <div class="featured">
+                    <div class="featured_content">
+                        <h2 class="h1 section-heading">Make Education Free for All</h2>
+                        <p>
+                            Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed cursus erat ut placerat dictum. <br>
+                            Etiam id facilisis enim, sed mattis magna. <br>
+                        </p>
+                        <p class="margin-top-4">
+                            <a href="single-petition.html#signature-form" class="btn btn-light btn-cta">Sign this
+                                Petition</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slideritem slider-two text-center item">
+            <div class="container-fluid">
+                <div class="featured-image hidden-sm hidden-xs">
+                </div>
 
-        <li>When Heroku received the source code, it fetched all the dependencies in the <a href="https://github.com/heroku/php-getting-started/blob/master/composer.json">composer.json</a>, creating a deployable slug.</li>
-        <li>The platform then spins up a dyno, a lightweight container that provides an isolated environment in which the slug can be mounted and executed.</li>
-        <li>You can scale your app, manage it, and deploy over <a href="https://addons.heroku.com/">150 add-on services</a>, from the Dashboard or CLI.</li>
-      </ul>
+                <div class="featured">
+                    <div class="featured_content">
+                        <h2 class="h1 section-heading">Travellers Taxes are reduced</h2>
+                        <p>
+                            Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed cursus erat ut placerat dictum. <br>
+                            Etiam id facilisis enim, sed mattis magna. <br>
+                        </p>
+                        <p class="margin-top-4">
+                            <a href="single-petition.html" class="btn btn-light btn-cta">See Details</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="slideritem slider-three text-center item">
+            <div class="container-fluid">
+                <div class="featured-image hidden-sm hidden-xs">
+                </div>
+                <div class="featured">
+                    <div class="featured_content">
+                        <h2 class="h1 section-heading">Stop taxing periods.#EndTamponTax</h2>
+                        <p>
+                            Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Sed cursus erat ut placerat dictum. <br>
+                            Etiam id facilisis enim, sed mattis magna. <br>
+                        </p>
+                        <p class="margin-top-4">
+                            <a href="blog.html" class="btn btn-light btn-cta">Thank You All</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-6">
-      <h3><span class="glyphicon glyphicon-link"></span> Next Steps</h3>
-      <ul>
-        <li>If you are following the <a href="https://devcenter.heroku.com/articles/getting-started-with-php">Getting Started</a> guide, then please head back to the tutorial and follow the next steps!</li>
-        <li>If you deployed this app by deploying the Heroku Button, then in a command line shell, run:</li>
-        <ul>
-          <li><code>git clone https://github.com/heroku/php-getting-started.git</code> - this will create a local copy of the source code for the app</li>
-          <li><code>cd php-getting-started</code> - change directory into the local source code repository</li>
-          <li><code>heroku git:remote -a &lt;your-app-name></code> - associate the Heroku app with the repository</li>
-          <li>You'll now be set up to run the app locally, or <a href="https://devcenter.heroku.com/articles/getting-started-with-php#push-local-changes">deploy changes</a> to Heroku</li>
-        </ul>
-      </ul>
-      <h3><span class="glyphicon glyphicon-link"></span> Helpful Links</h3>
-      <ul>
-        <li><a href="https://www.heroku.com/home">Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/">Heroku Dev Center</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/getting-started-with-php">Getting Started with PHP on Heroku</a></li>
-        <li><a href="https://devcenter.heroku.com/articles/deploying-php">Deploying PHP Apps on Heroku</a></li>
-      </ul>
-    </div>
-  </div> <!-- row -->
-   <div class="alert alert-info text-center" role="alert">
-    Please do work through the Getting Started guide, even if you do know how to build such an application.  The guide covers the basics of working with Heroku, and will familiarize you with all the concepts you need in order to build and deploy your own apps.
-  </div>
-</div>
 
-{% endblock %}
+    <div class="not-alone">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 left-part">
+                    <h2 class="h1 section-heading">You are not Alone</h2>
+                    <p>
+                        Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+                        Etiam id facilisis enim, sed mattis magna. <br>
+                    </p>
+                    <p class="margin-top-4">
+                        <a href="create-petition.html" class="btn btn-brand btn-cta">Create a Petition</a>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-md-6 right-part">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 text-center one">
+                            <img src="/img/icons/abstract-one.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 text-center two">
+                            <img src="/img/icons/abstract-two.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 text-center three">
+                            <img src="/img/icons/abstract-three.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 text-center four">
+                            <img src="/img/icons/abstract-four.png" alt="">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="easy-steps">
+        <div class="custom-container">
+            <div class="light-shade">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="h1 section-heading">How it Works</h2>
+                            <p>
+                                Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
+                                Lorem ipsum dolor sit amet, sed mattis magna.
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-md-4 create text-center">
+                            <i class="fa fa-pencil fa-3x" aria-hidden="true"></i>
+                            <!--<img src="/img/icons/abstract-five.png" alt="">-->
+                            <h4>Create a Petition</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                        <div class="col-xs-12 col-md-4 collect text-center">
+                            <i class="fa fa-user-plus fa-3x" aria-hidden="true"></i>
+                            <!--<img src="/img/icons/abstract-six.png" alt="">-->
+                            <h4>Collect Signatures</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                        <div class="col-xs-12 col-md-4 raise text-center">
+                            <i class="fa fa-location-arrow fa-3x" aria-hidden="true"></i>
+                            <!--<img src="/img/icons/abstract-seven.png" alt="">-->
+                            <h4>Raise at Parliament</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent gravida pulvinar quam
+                                ac congue. Duis iaculis nec erat at sagittis. Vestibulum sagittis inter</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="engagement-counter">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="h1 section-heading">Engagement</h2>
+                    <p class="margin-bottom-3">
+                        Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="image-frame">
+                        <img src="/img/icons/doc-icon.png" alt="doc-icon"/>
+                    </div>
+                    <h3><span class="counter">5,501</span></h3>
+                    <p>Petitions created already<br> The count goes on</p>
+
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="image-frame">
+                        <img src="/img/icons/doc-pen-icon.png" alt="doc-pen-icon"/>
+                    </div>
+                    <h3><span class="counter">45,501</span></h3>
+                    <p>Signatures collected on<br> all of the petitions</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="image-frame">
+                        <img src="/img/icons/people-icon.png" alt="people-icon"/>
+                    </div>
+                    <h3><span class="counter">60</span>K+</h3>
+                    <p>People on site to signature<br> and discuss issues</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="image-frame">
+                        <img src="/img/icons/award.png" alt="award-icon"/>
+                    </div>
+                    <h3><span class="counter">12</span>+</h3>
+                    <p>Government and NGO Awards<br> and a lot of socail works</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="success-petition">
+        <div class="container petition-list">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="h1 text-center section-heading">Successful Petitions</h2>
+                    <p class="text-center">
+                        Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="petition-item card">
+                        <div class="banner">
+                            <a href="single-petition.html"><img src="/img/petition-one.jpg" alt="petition-cover"/></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="single-petition.html">Stop hunting, Save the birds</a></h5>
+                            <p>Target: 10,021 Signatures</p>
+                            <div class="progress-wrapper">
+                                <div class="progress small">
+                                    <div class="value"></div>
+                                </div>
+                                <span>67%</span>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo">
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="signature-count">
+                                    <p>10,021 Signed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="petition-item">
+                        <div class="banner">
+                            <a href="single-petition.html"><img src="/img/petition-two.jpg" alt="petition-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="single-petition.html">Make education free for poors</a></h5>
+                            <p>Target: 10,021 Signatures</p>
+                            <div class="progress-wrapper">
+                                <div class="progress small">
+                                    <div class="value"></div>
+                                </div>
+                                <span>67%</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo">
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="signature-count">
+                                    <p>5,630 Signed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="petition-item">
+                        <div class="banner">
+                            <a href="single-petition.html"><img src="/img/petition-three.jpg"
+                                                                alt="petition-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="single-petition.html">Decrease Travellers taxes</a></h5>
+                            <p>Target: 10,021 Signatures</p>
+                            <div class="progress-wrapper">
+                                <div class="progress small">
+                                    <div class="value"></div>
+                                </div>
+                                <span>67%</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo">
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="signature-count">
+                                    <p>9,109 Signed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="petition-item">
+                        <div class="banner">
+                            <a href="single-petition.html"><img src="/img/petition-four.jpg" alt="petition-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="single-petition.html">Ensure a flexible work hour</a></h5>
+                            <p>Target: 10,021 Signatures</p>
+                            <div class="progress-wrapper">
+                                <div class="progress small">
+                                    <div class="value"></div>
+                                </div>
+                                <span>67%</span>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo">
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="signature-count">
+                                    <p>8,127 Signed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <p class="section_view_more">
+                        <a href="petition-listing.html" class="btn btn-brand btn-cta-n">See Latest Petition</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="blog-list legendary-story">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="h1 text-center section-heading">Latest News</h2>
+                    <p class="text-center">
+                        Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
+                        Lorem ipsum dolor sit amet.
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                    <div class="blog-item">
+                        <div class="banner">
+                            <a href="blog.html"><img src="/img/petition-one.jpg" alt="blog-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
+                                lacinia.</a></h5>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="date">
+                                    <p>25, Feb 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="blog-item">
+                        <div class="banner">
+                            <a href="blog.html"><img src="/img/petition-seven.jpg" alt="blog-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
+                                lacinia.</a></h5>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="date">
+                                    <p>25, Feb 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="blog-item">
+                        <div class="banner">
+                            <a href="blog.html"><img src="/img/petition-eight.jpg" alt="blog-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
+                                lacinia.</a></h5>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="date">
+                                    <p>25, Feb 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                    <div class="blog-item">
+                        <div class="banner">
+                            <a href="blog.html"><img src="/img/petition-seven.jpg" alt="blog-cover"></a>
+                        </div>
+                        <div class="contents">
+                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
+                                lacinia.</a></h5>
+                            <div class="report-info">
+                                <div class="reporter">
+                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
+                                    <p>Jane Doe</p>
+                                </div>
+                                <div class="date">
+                                    <p>25, Feb 2017</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <p class="section_view_more"><a href="blog-list.html" class="btn btn-brand btn-cta-n">See More</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}
+
+
+
