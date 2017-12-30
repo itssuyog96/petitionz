@@ -152,7 +152,7 @@ $app->get('/login', function() use($app) {
   return $app['twig']->render('login.twig');
 });
 
-$app->post('/login', function(Request $request) use($app) {
+$app->post('/checklogin', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
 
   $username = $request->get('mail');
