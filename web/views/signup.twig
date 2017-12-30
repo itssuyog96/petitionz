@@ -7,6 +7,7 @@
             </div>
             <div class="right-part col-xs-12 col-md-6">
                 <h2 class="h1 section-heading">Sign Up</h2>
+                <span class="alert alert-warning" hidden id="signup-form-error" style="margin: 10px;font-size: 10px;padding: 10px;"></span>
                 <form action="/register" id="signup-form" class="signup-form" method="POST" autocomplete="off" name="registration">
                     <div class="form-group">
                         <input type="text" placeholder="First Name" id="firstname" class="form-control half" name="firstname"  autocomplete="off" required>
@@ -93,9 +94,13 @@ $('#signup-form').submit(function(event){
         data : $('#signup-form').serialize(),
         success : function(data){
             console.log(data);
+            alert('To complete registration check your email for verification link.');
+            //window.location.replace('/');
         },
         error : function(err){
-            console.log("error : ", err);
+            console.log("error : ", err.responseText);
+            $('#signup-form-error').show();
+            $('#signup-form-error').text(err.responseText);
         }
     })
 })
