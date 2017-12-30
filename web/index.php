@@ -139,7 +139,8 @@ $app->get('/verify/{aadhar}/{hash}', function($aadhar, $hash) use($app) {
 
   $data = $app['db']->select('user', ['fname'], [
     'aadhar' => $aadhar,
-    'hash'  => $hash
+    'hash'  => $hash,
+    'active' => 0
   ]);
 
   if(count($data) < 1){
