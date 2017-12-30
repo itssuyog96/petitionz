@@ -1,0 +1,68 @@
+{% extends 'layout.html'%}
+{% block content %}
+    
+    <header id="header">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar ">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar-collapse" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="index-2.html">
+                            <!--<i class="fa fa-envelope-open" aria-hidden="true"></i> PetitionZ-->
+                            <img src="assets/img/petitionz-logo.png" alt="petitionz-logo" />
+                        </a>
+                    </div>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="header-navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="index-2.html">Home</a></li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Petitions<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="single-petition.html">Single Petition</a></li>
+                                    <li><a href="create-petition.html">Create Petition</a></li>
+                                    <li><a href="petition-listing.html">Petition Listing</a></li>
+                                    <li><a href="petition-listing-three-col.html">Petition Listing (3 col)</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Writings<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="blog-list.html">Blog Listing</a></li>
+                                    <li><a href="blog-list_nohead.html">Blog Listing(Without Background Heading)</a></li>
+                                    <li><a href="blog.html">Single Blog</a></li>
+                                    <li><a href="blog-left-sidebar.html">Blog - Left sidebar</a></li>
+                                    <li><a href="blog-right-sidebar.html">Blog - Right sidebar</a></li>
+                                    <li><a href="typography.html">Typography</a></li>
+                                    <li><a href="404.html">404 - Page</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="login.html">Sign In</a></li>
+                        </ul>
+                    </div><!-- /.navbar-collapse -->
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="not-found">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h2 class="section-heading">Page Not Found</h2>
+                    <img src="assets/img/404.jpg" width="400" alt="page not found image">
+                    <p>Sorry, but the page you were trying to reach does not exist.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}        
