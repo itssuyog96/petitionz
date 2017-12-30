@@ -120,8 +120,8 @@ $app->post('/register', function(Request $request) use($app) {
     //Content
     $app['mail']->isHTML(true);                                  // Set email format to HTML
     $app['mail']->Subject = 'Pending Action';
-    $app['mail']->Body    = 'To complete registration open this verfication link or paste in browser url -> <a href="https://polar-oasis-15100.herokuapp.com/verify/'. $hash .'">https://polar-oasis-15100.herokuapp.com/verify/'. $hash .'</a>';
-    $app['mail']->AltBody = 'To complete registration open this verfication link or paste in browser url -> https://polar-oasis-15100.herokuapp.com/verify/'. $hash;
+    $app['mail']->Body    = 'To complete registration open this verfication link or paste in browser url -> <a href="https://polar-oasis-15100.herokuapp.com/verify/'.md5($request->get('aadhar')).'/'. $hash .'">https://polar-oasis-15100.herokuapp.com/verify/'.md5($request->get('aadhar')).'/'. $hash .'</a>';
+    $app['mail']->AltBody = 'To complete registration open this verfication link or paste in browser url -> https://polar-oasis-15100.herokuapp.com/verify/'.md5($request->get('aadhar')).'/'. $hash;
 
     $app['mail']->send();
     echo 'Message has been sent';
@@ -133,5 +133,24 @@ $app->post('/register', function(Request $request) use($app) {
 
   return new Response('Done', 200);
 });
+
+$app->get('/verify/{aadhar}/{hash}', function($aadhar, $hash) use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+  $data = $app['db']->select('user', ['fname'], [
+    'aadhar' => $aadhar,
+    'hash'  => $hash
+  ]);
+
+  if(count($data) < 1){
+    return $app['twig']->render('verify.twig', ['error' => 'The verification link is either expired or invalid!']);
+  }
+
+  $app['db']->update('user', ['active' => 1], ['aadhar' => $aadhar]);
+
+  return $app['twig']->render('verify.twig', ['success' => 'Hey ' . $data[0]['fname']. ', your account has been verified! Proceed to login.' ]);
+
+});
+
 
 $app->run();
