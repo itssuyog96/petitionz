@@ -59,7 +59,7 @@
                     </div>
                     <div class="right-part col-md-6 col-xs-12">
                         <h2 class="h1 section-heading">Log In</h2>
-                        <form action="#" id="login-form" class="login-form" method="POST" novalidate="novalidate">
+                        <form action="/login" id="login-form" class="login-form" method="POST" novalidate="novalidate">
                             <div class="form-group">
                                 <input type="email" required="" placeholder="Email" id="mail" class="form-control" name="mail">
                             </div>
@@ -79,5 +79,30 @@
                 </div>
             </div>
     </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+
+
+$('#login-form').submit(function(event){
+    event.preventDefault();
+
+    $.ajax({
+        url : '/login',
+        method: 'POST',
+        data: $('#login-form').serialize(),
+        success: function(data){
+            console.log(data);
+        },
+        error: function(err){
+            console.log(err.responseText);
+        }
+    })
+})
+
+</script>
 
 {% endblock %}

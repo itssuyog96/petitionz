@@ -95,7 +95,7 @@ $('#signup-form').submit(function(event){
         success : function(data){
             console.log(data);
             alert('To complete registration check your email for verification link.');
-            //window.location.replace('/');
+            window.location.replace('/');
         },
         error : function(err){
             console.log("error : ", err.responseText);

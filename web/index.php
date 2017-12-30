@@ -1,5 +1,4 @@
 <?php
-
 require('../vendor/autoload.php');
 
 // Using Medoo namespace
@@ -9,9 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
 // Initialize
-
 $app = new Silex\Application();
 $app['debug'] = true;
 $app['mail'] = new PHPMailer(true);                              // Passing `true` enables exceptions
@@ -40,10 +37,6 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-
-  // $data = $app['db']->select('aadhartbl', ['firstname', 'aadharno'], ['aadharno' => '123456789111']);
-
-  echo 'Fetched data : ' . json_encode($data);
   return $app['twig']->render('index.twig');
 });
 
@@ -73,7 +66,7 @@ $app->post('/register', function(Request $request) use($app) {
     ]);
 
   if(count($userdata) < 1){
-    return new Response('Aadhar entry already exists or invalid!', 500);
+    return new Response('Aadhar does not exists or invalid!', 500);
   }
 
   $userdata = $app['db']->select('user', ['fname', 'lname', 'aadhar'],[
@@ -125,11 +118,11 @@ $app->post('/register', function(Request $request) use($app) {
 
     $app['mail']->send();
     echo 'Message has been sent';
-} catch (Exception $e) {
-    echo 'Message could not be sent.';
-    echo 'Mailer Error: ' . $app['mail']->ErrorInfo;
-    return new Response('Error sending mail', 504);
-}
+  } catch (Exception $e) {
+      echo 'Message could not be sent.';
+      echo 'Mailer Error: ' . $app['mail']->ErrorInfo;
+      return new Response('Error sending mail', 504);
+  }
 
   return new Response('Done', 200);
 });
@@ -152,6 +145,47 @@ $app->get('/verify/{aadhar}/{hash}', function($aadhar, $hash) use($app) {
   return $app['twig']->render('verify.twig', ['success' => 'Hey ' . $data[0]['fname']. ', your account has been verified! Proceed to login.' ]);
 
 });
+
+
+$app->get('/login', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+  return $app['twig']->render('login.twig');
+});
+
+$app->post('/login', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+  $username = $request->get('mail');
+  $password = $request->get('pass');
+
+  $data = $app['db']->select('user', '*', [
+    'uname' => $username,
+    'password' => md5($password),
+    'active' => 1
+  ]);
+
+  if(count($data) < 1){
+    return new Response('Invalid credentials!', 403);
+  }
+
+  $app['session']->set('user', array(
+    'username' => $username,
+    'aadhar' => $data[0]['aadhar'],
+    'fname' => $data[0]['fname'],
+    'lname' => $data[0]['lname'],
+    'state' => $data[0]['state']
+    ));
+
+    return new Response('Authenticated Successfully!');
+
+});
+
+$app->get('/logout', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+  $app['session']->remove('user');
+  return $app->redirect('/');
+});
+
 
 
 $app->run();
