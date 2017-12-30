@@ -43,7 +43,13 @@
                           </ul>
                       </li>
                       <li><a href="contact.html">Contact</a></li>
-                      <li><a href="login.html">Sign In</a></li>
+                      {% if app.user.fname is defined %}
+                        <li><a href="/logout">{{ app.user.fname }} {{ app.user.lname }} (Logout)</a></li>
+                      {% else %}
+                        <li><a href="/login">Sign In</a></li>
+                      {% endif %}
+                      
+
                   </ul>
               </div><!-- /.navbar-collapse -->
           </nav>

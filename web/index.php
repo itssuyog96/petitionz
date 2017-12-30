@@ -37,6 +37,11 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
+
+  $app['user'] = $app['session']->get('user');
+
+  echo $app['user'];
+
   return $app['twig']->render('index.twig');
 });
 
@@ -155,26 +160,25 @@ $app->get('/login', function() use($app) {
 $app->post('/checklogin', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
 
-  $username = $request->get('mail');
-  $password = $request->get('pass');
-
   $data = $app['db']->select('user', '*', [
-    'uname' => $username,
-    'password' => md5($password),
+    'uname' => $request->get('mail'),
+    'password' => md5($request->get('pass')),
     'active' => 1
   ]);
 
   if(count($data) < 1){
-    return new Response('Invalid credentials!', 403);
+    return new Response('Invalid credentials!', 500);
   }
 
   $app['session']->set('user', array(
-    'username' => $username,
+    'username' => $request->get('mail'),
     'aadhar' => $data[0]['aadhar'],
     'fname' => $data[0]['fname'],
     'lname' => $data[0]['lname'],
     'state' => $data[0]['state']
     ));
+
+    $app['twig']->addGlobal('user', $app['session']->get('user'));
 
     return new Response('Authenticated Successfully!');
 
@@ -182,6 +186,7 @@ $app->post('/checklogin', function(Request $request) use($app) {
 
 $app->get('/logout', function() use($app) {
   $app['monolog']->addDebug('logging output.');
+  $app['user'] = null;
   $app['session']->remove('user');
   return $app->redirect('/');
 });
