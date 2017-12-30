@@ -58,8 +58,16 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 text-center">
+                    {% if error %}
                         <h2 class="section-heading">{{error}}</h2>
-                        <p>{{success}}</p>
+                        <p>Try again or contact site administrator</p>
+                    {% endif %}
+
+                    {% if error %}
+                        <h2 class="section-heading">{{success}}</h2>
+                        <p>Thank you for registering with us!</p>
+                    {% endif %}
+                        
                     </div>
                 </div>
             </div>
