@@ -35,18 +35,22 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 // Our web handlers
 
+if($app['session']->get('user')){
+  $app['user'] = $app['session']->get('user');
+}
+
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-
-  $app['user'] = $app['session']->get('user');
-
-  echo $app['user'];
 
   return $app['twig']->render('index.twig');
 });
 
 $app->get('/signup', function() use($app) {
   $app['monolog']->addDebug('logging output.');
+
+  if($app['session']->get('user')){
+    return $app->redirect('/');
+  }
 
   return $app['twig']->render('signup.twig');
 });
@@ -154,6 +158,11 @@ $app->get('/verify/{aadhar}/{hash}', function($aadhar, $hash) use($app) {
 
 $app->get('/login', function() use($app) {
   $app['monolog']->addDebug('logging output.');
+
+  if($app['session']->get('user')){
+    return $app->redirect('/');
+  }
+
   return $app['twig']->render('login.twig');
 });
 
