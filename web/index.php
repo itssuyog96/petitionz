@@ -146,12 +146,12 @@ $app->get('/verify/{aadhar}/{hash}', function($aadhar, $hash) use($app) {
   ]);
 
   if(count($data) < 1){
-    return $app['twig']->render('verify.twig', ['error' => 'The verification link is either expired or invalid!']);
+    return $app['twig']->render('verify.twig', ['title'=> 'Mail Verification', 'error' => 'The verification link is either expired or invalid!']);
   }
 
   $app['db']->update('user', ['active' => 1], ['aadhar' => $aadhar]);
 
-  return $app['twig']->render('verify.twig', ['success' => 'Hey ' . $data[0]['fname']. ', your account has been verified! Proceed to login.' ]);
+  return $app['twig']->render('verify.twig', ['title'=> 'Mail Verification', 'success' => 'Hey ' . $data[0]['fname']. ', your account has been verified! Proceed to login.' ]);
 
 });
 
