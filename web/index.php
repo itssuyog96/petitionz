@@ -42,7 +42,7 @@ if($app['session']->get('user')){
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
 
-  return $app['twig']->render('index.twig');
+  return $app['twig']->render('index.twig', ['title' => 'Home']);
 });
 
 $app->get('/signup', function() use($app) {
@@ -52,7 +52,7 @@ $app->get('/signup', function() use($app) {
     return $app->redirect('/');
   }
 
-  return $app['twig']->render('signup.twig');
+  return $app['twig']->render('signup.twig', ['title'=> 'Sign Up']);
 });
 
 $app->post('/register', function(Request $request) use($app) {
@@ -163,7 +163,7 @@ $app->get('/login', function() use($app) {
     return $app->redirect('/');
   }
 
-  return $app['twig']->render('login.twig');
+  return $app['twig']->render('login.twig', ['title' => 'Log In']);
 });
 
 $app->post('/checklogin', function(Request $request) use($app) {
@@ -202,4 +202,21 @@ $app->get('/logout', function() use($app) {
 
 
 
+//create petition
+$app->get('/create-petition', function(Request $request) use($app){
+  $app['monolog']->addDebug('logging output.');
+
+  if($app['session']->get('user')){
+    return $app->redirect('/');
+  }
+  return $app['twig']->render('create-petition.twig', ['title'=> 'Create Petition']);
+});
+
+$app->post('/createpetitionform', function(Requets $request) use($app){
+  $app['db']->insert('petition', [
+    'title' => $request->get('petition-title'),
+    'description' => $request->get('petition-description'),
+    'targetsign' => $request->get('target')
+  ]);
+});
 $app->run();
