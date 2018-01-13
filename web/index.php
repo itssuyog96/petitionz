@@ -222,6 +222,24 @@ $app->get('/create-petition', function(Request $request) use($app){
   return $app['twig']->render('create-petition.twig', ['title'=> 'Create Petition']);
 });
 
+//show single petition
+$app->get('/single-petition/{id}', function($id) use($app){
+  $app['monolog']->addDebug('logging output.');
+
+  if($app['session']->get('user')){
+    return $app->redirect('/');
+  }
+
+  $data = $app['db']->select('petition', '*', ['id' => $id]);
+  if(count($data) < 1){
+    return $app->redirect('/');   //TODO : Redirect to 404
+  }
+
+  $petition = $data[0];
+
+  return $app['twig']->render('single-petition.twig', ['title'=> 'Petition : ' . $petition->title, 'petition' => $petition]);
+});
+
 $app->post('/post-petition', function(Request $request) use($app){
 
   try{

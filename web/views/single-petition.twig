@@ -1,0 +1,319 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="petition-header" style="background-image: url({{ petition.bannerimage }});">
+    <div class="light-shade">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="h1 section-heading section-heading-white">Stop Hunting, Save the birds</h2>
+                    <div class="progress-wrapper progress-wrapper-white">
+                        <div class="progress small">
+                            <div class="value"></div>
+                        </div>
+                        <span>67%</span>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="meta">
+                        <div class="signature-info pull-left">Signatures: <span>{{petition.currentsign}}</span> of <span>{{petition.targetsign}}</span></div>
+                        <ul class="list-unstyled social-area social-area-signature pull-right">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="envelop"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="single-petition">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="meta-info">
+                    <div class="creatorinfo">
+                        <p class="small">
+                            A Petition by: <b>Jonathan Doe</b>
+                        </p>
+                        <p class="small">
+                            Created on: 21<sup>st</sup> Feb, 2017
+                        </p>
+                    </div>
+                    <div class="social text-right">
+                        <a href="#sign-this-petition" class="btn btn-brand btn-cta pull-right">Sign This</a>
+                    </div>
+                </div>
+                <div class="petition-info">
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare, nisl ac porta venenatis, sem nisl congue nibh, mattis fermentum sapien sapien at neque.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur ligula leo, quis suscipit erat venenatis nec.
+                        Phasellus laoreet velit ac commodo hendrerit. Sed interdum pretium leo, vitae viverra neque mollis a. Ut augue purus, commodo ac consequat ac, convallis non felis.
+                        Pellentesque et ante ut velit sagittis porttitor vel a velit. Praesent viverra arcu vehicula tortor maximus, eu tristique eros laoreet.
+                        Quisque sed placerat magna. Suspendisse efficitur sem non accumsan eleifend. Nullam tincidunt enim vitae orci blandit, sit amet viverra dolor euismod.
+                        Sed dui nibh, venenatis non sollicitudin ac, euismod id ipsum. Proin orci nulla, porta varius arcu et, pellentesque auctor massa.
+                        Morbi egestas sapien et lorem vehicula, quis semper mauris interdum. Maecenas eget dui et quam dapibus commodo.
+                        <br> <br>
+                        Nullam lacinia sed sapien at lobortis. Cras vitae enim at justo pulvinar pellentesque et et augue. Aliquam efficitur ut enim id tincidunt.
+                        Nullam eget egestas felis, eget volutpat purus. Suspendisse ac nisi sagittis, rhoncus turpis eget, rhoncus sapien. Maecenas tempor nulla eu risus laoreet tempor.
+                        Donec maximus dictum urna id facilisis.
+                    </p>
+                    <ol>
+                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
+                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
+                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
+                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
+                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
+                    </ol>
+                    <p>
+                        Vivamus eget sem sit amet eros viverra porttitor a quis lacus. Vestibulum nec dui eget lacus fermentum malesuada.
+                        Suspendisse at metus sed lectus vulputate convallis. Aliquam maximus odio non nunc tincidunt pharetra.
+                        Curabitur in eros eget tellus accumsan imperdiet eu eget enim. Sed viverra ex mattis justo venenatis, luctus fermentum mi eleifend.
+                        Nam non tortor in tellus tristique faucibus sit amet tristique risus. Maecenas in ex id quam eleifend convallis at id ante.
+                        Vestibulum ornare posuere mi, nec placerat elit imperdiet nec. Nam aliquet varius enim, ut sollicitudin diam lobortis quis.
+                        Ut at tellus non ex dictum congue. Nam vitae eleifend purus.
+                    </p>
+
+                </div>
+
+
+            </div>
+        </div>
+        <div class="petition-media-items">
+            <div class="row petition-video-section">
+                <div class="col-xs-12 col-md-6">
+                    <div class="petition-media-video">
+                        <iframe src="https://www.youtube.com/embed/YTR21os8gTA"> </iframe>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 petition-video-info">
+                    <h4>Birds are Important</h4>
+                    <p>
+                        Vivamus eget sem sit amet eros viverra porttitor a quis lacus. Vestibulum nec dui eget lacus fermentum malesuada.
+                        Suspendisse at metus sed lectus vulputate convallis. Aliquam maximus odio non nunc tincidunt pharetra.
+                        Curabitur in eros eget tellus accumsan imperdiet eu eget enim. Sed viverra ex mattis justo venenatis, luctus fermentum mi eleifend.
+                        Nam non tortor in tellus tristique faucibus sit amet tristique risus. Maecenas in ex id quam eleifend convallis at id ante.
+                        Vestibulum ornare posuere mi, nec placerat elit imperdiet nec.
+                    </p>
+                </div>
+            </div>
+            <div class="row petition-media-photos" id="magnific-gallery">
+                <div class="col-xs-12 col-md-3">
+                    <a href="assets/img/bird-one.jpg">
+                        <img src="assets/img/bird-one.jpg" class="petition-media-photo img-responsive" alt="bird-photo" />
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <a href="assets/img/bird-two.html">
+                        <img src="assets/img/bird-two.html" class="img-responsive" alt="bird-photo" />
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <a href="assets/img/bird-three.jpg">
+                        <img src="assets/img/bird-three.jpg" class="img-responsive" alt="bird-photo" />
+                    </a>
+                </div>
+                <div class="col-xs-12 col-md-3">
+                    <a href="assets/img/bird-four.jpg">
+                        <img src="assets/img/bird-four.jpg" class="img-responsive" alt="bird-photo" />
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="recipient-area">
+                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                    <p class="recipient-heading text-center">The Letter Will be sent to:</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="recipient">
+                                <p><strong>Ms Jane Doe</strong></p>
+                                <p>Head of Ministry, Environment</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="recipient">
+                                <p><strong>Mr. John Doe</strong></p>
+                                <p>Head of Ministry, Information</p>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-4">
+                            <div class="recipient">
+                                <p><strong>Ms Jane Doe</strong></p>
+                                <p>Head of Ministry, Humankind</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="letter">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="letter-wrapper">
+                    <p>
+                        {{ petition.letter }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="updates-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center update-news">
+                <h3 class="section-heading heading-no-top-margin">Updates</h3>
+                <div class="h-line"></div>
+                <div id="updates-carousel" class="owl-carousel owl-theme">
+
+                    <div class="update-news">
+                        <h5>12,304 Rescued</h5>
+                        <p>
+                            Porta convallis. Integer magna orci, consequat ac nisl vel, tristique dictum sapien. Nam iaculis sit amet sem a porttitor.
+                            Cras vestibulum tempor ligula eu vehicula. Nam sed purus augue. Donec non semper arcu.
+                        </p>
+                        <p class="reporter">
+                            John Doe, <b>Reporter</b> <br>
+                            25<sup>th</sup> Feb, 2017
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sgnature-listing-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h3 class="section-heading heading-no-top-margin">Signatures</h3>
+                <div class="h-line"></div>
+            </div>
+        </div>
+        <div class="row" id="signatures_cards">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="sign-card">
+                    <div class="thumb-photo">
+                        <img src="assets/img/reporter.jpg" class="img-responsive" alt="signer-photo">
+                    </div>
+                    <div class="signers-info">
+                        <h5>Jane Doe</h5>
+                        <p class="date-time">02-17-2017 at 4:46 PM	<span class="pull-right">#8691</span></p>
+                        <p class="message">Etiam sed tortor augue. Aliquam erat volutpat. Etiam malesuada gravida hendrerit facilisis auctor.</p>
+
+                    </div>
+
+                </div>
+            </div>
+
+       
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <p class="section_view_more">
+                    <a href="signature-list.html" class="btn btn-brand btn-cta">See All</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="sign-this-petition" id="sign-this-petition">
+    <div class="light-shade">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3 class="section-heading heading-no-top-margin">Sign this Petition</h3>
+                    <div class="h-line"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                    <form id="signature-form" action="#" class="signature-form" method="POST" novalidate="novalidate">
+                        <div class="row">
+                                <label class="sr-only" for="sf-fname">First Name</label>
+                                <div class="col-md-6">
+                                <input type="text"  required data-rule-minlength="3" class="form-control"  placeholder="First Name" id="sf-fname"  name="sf-fname">
+                                </div>
+                                <label class="sr-only" for="sf-lname">Last Name</label>
+                                <div class="col-md-6">
+                                <input type="text" required data-rule-minlength="3" class="form-control"  placeholder="Last Name" id="sf-lname"  name="sf-lname">
+                                </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="sr-only" for="sf-mail">Email</label>
+                            <div class="col-md-12">
+                                <input type="email" required class="form-control" placeholder="Email" id="sf-mail"  name="sf-mail">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="sr-only" for="detailed-updates">Comments</label>
+                            <div class="col-md-12">
+                            <textarea class="form-control"  required data-rule-minlength="20" id="detailed-updates" name="sf-detailed-updates" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
+                            </div>
+                        </div>
+                        <p class="text-center"> <button type="submit" class="btn btn-brand btn-cta">Sign This</button></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</main>
+
+<!--FOOTER START-->
+<footer id="footer">
+
+<div class="container">
+<div class="row">
+    <div class="col-xs-12 col-sm-6">
+        <div class="footer-single footer-about">
+            <h2 class="title footer-logo"><a href="index-2.html"><img src="assets/img/petitionz-logo.png" alt="PetitionZ logo" class="img-responsive"/></a></h2>
+            <p>
+                Eleifend tempus eros pellentesque vehicula. Aliquam turpis justo,mattis id neque et,
+                semper lacinia purus. Vivamus dapibus tellus blandit efficitur justo lacinia eu.
+                Praesent at nibh sit amet risus dictum nec eu quam. Fusce nec nisi dui.
+            </p>
+            <ul class="list-unstyled social-area">
+                <li><a href="#" class="facebook"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                <li><a href="#" class="envelop"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+            </ul>
+            <p>&copy; 2017 Copyright <span>PetitionZ</span> theme. All Rights reserved. <a href="#">Codeboxr.com</a></p>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+        <h4 class="stay_connected_title">Stay Connected</h4>
+        <div class="subscribe-form">
+            <form class="subscribe-form-action" action="#">
+                <div class="form-group subscribe-input">
+                    <input name="subscribe" id="subscribe" class="form-control cbx-input form-control" required="required" placeholder="Email Address" type="email">
+                </div>
+                <div class="form-group subscribe-btn">
+                    <button class="btn" name="subscribe-submit" type="submit">Subscribe</button>
+                </div>
+            </form>
+        </div>
+        <p>
+            Vivamus dapibus tellus blandit efficitur justo lacinia eu.
+            Praesent at nibh sit amet risus dictum nec eu quam. Fusce nec nisi dui.
+        </p>
+
+</div> <!--//.col-->
+{% endblock %}
