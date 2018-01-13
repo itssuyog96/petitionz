@@ -37,10 +37,10 @@
                 <div class="meta-info">
                     <div class="creatorinfo">
                         <p class="small">
-                            A Petition by: <b>Jonathan Doe</b>
+                            A Petition by: <b>{{petition.createdby}}</b>
                         </p>
                         <p class="small">
-                            Created on: 21<sup>st</sup> Feb, 2017
+                            Created on: {{petition.createdon}}
                         </p>
                     </div>
                     <div class="social text-right">
@@ -49,34 +49,8 @@
                 </div>
                 <div class="petition-info">
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ornare, nisl ac porta venenatis, sem nisl congue nibh, mattis fermentum sapien sapien at neque.
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consectetur ligula leo, quis suscipit erat venenatis nec.
-                        Phasellus laoreet velit ac commodo hendrerit. Sed interdum pretium leo, vitae viverra neque mollis a. Ut augue purus, commodo ac consequat ac, convallis non felis.
-                        Pellentesque et ante ut velit sagittis porttitor vel a velit. Praesent viverra arcu vehicula tortor maximus, eu tristique eros laoreet.
-                        Quisque sed placerat magna. Suspendisse efficitur sem non accumsan eleifend. Nullam tincidunt enim vitae orci blandit, sit amet viverra dolor euismod.
-                        Sed dui nibh, venenatis non sollicitudin ac, euismod id ipsum. Proin orci nulla, porta varius arcu et, pellentesque auctor massa.
-                        Morbi egestas sapien et lorem vehicula, quis semper mauris interdum. Maecenas eget dui et quam dapibus commodo.
-                        <br> <br>
-                        Nullam lacinia sed sapien at lobortis. Cras vitae enim at justo pulvinar pellentesque et et augue. Aliquam efficitur ut enim id tincidunt.
-                        Nullam eget egestas felis, eget volutpat purus. Suspendisse ac nisi sagittis, rhoncus turpis eget, rhoncus sapien. Maecenas tempor nulla eu risus laoreet tempor.
-                        Donec maximus dictum urna id facilisis.
+                        {{petition.description}}
                     </p>
-                    <ol>
-                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
-                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
-                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
-                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
-                        <li>Vestibulum nec dui eget lacus fermentum malesuada.</li>
-                    </ol>
-                    <p>
-                        Vivamus eget sem sit amet eros viverra porttitor a quis lacus. Vestibulum nec dui eget lacus fermentum malesuada.
-                        Suspendisse at metus sed lectus vulputate convallis. Aliquam maximus odio non nunc tincidunt pharetra.
-                        Curabitur in eros eget tellus accumsan imperdiet eu eget enim. Sed viverra ex mattis justo venenatis, luctus fermentum mi eleifend.
-                        Nam non tortor in tellus tristique faucibus sit amet tristique risus. Maecenas in ex id quam eleifend convallis at id ante.
-                        Vestibulum ornare posuere mi, nec placerat elit imperdiet nec. Nam aliquet varius enim, ut sollicitudin diam lobortis quis.
-                        Ut at tellus non ex dictum congue. Nam vitae eleifend purus.
-                    </p>
-
                 </div>
 
 
@@ -103,22 +77,7 @@
             <div class="row petition-media-photos" id="magnific-gallery">
                 <div class="col-xs-12 col-md-3">
                     <a href="assets/img/bird-one.jpg">
-                        <img src="assets/img/bird-one.jpg" class="petition-media-photo img-responsive" alt="bird-photo" />
-                    </a>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <a href="assets/img/bird-two.html">
-                        <img src="assets/img/bird-two.html" class="img-responsive" alt="bird-photo" />
-                    </a>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <a href="assets/img/bird-three.jpg">
-                        <img src="assets/img/bird-three.jpg" class="img-responsive" alt="bird-photo" />
-                    </a>
-                </div>
-                <div class="col-xs-12 col-md-3">
-                    <a href="assets/img/bird-four.jpg">
-                        <img src="assets/img/bird-four.jpg" class="img-responsive" alt="bird-photo" />
+                        <img src="{{petition.photos}}" class="petition-media-photo img-responsive" alt="bird-photo" />
                     </a>
                 </div>
             </div>
@@ -130,22 +89,11 @@
                     <div class="row">
                         <div class="col-xs-12 col-md-4">
                             <div class="recipient">
-                                <p><strong>Ms Jane Doe</strong></p>
-                                <p>Head of Ministry, Environment</p>
+                                <p><strong>{{petiiton.recepient}}</strong></p>
+                                <p>{{peition.recepientdesig}}</p>
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="recipient">
-                                <p><strong>Mr. John Doe</strong></p>
-                                <p>Head of Ministry, Information</p>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-md-4">
-                            <div class="recipient">
-                                <p><strong>Ms Jane Doe</strong></p>
-                                <p>Head of Ministry, Humankind</p>
-                            </div>
-                        </div>
+                       
                     </div>
                 </div>
             </div>

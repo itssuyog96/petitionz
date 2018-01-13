@@ -226,7 +226,7 @@ $app->get('/create-petition', function(Request $request) use($app){
 $app->get('/single-petition/{id}', function($id) use($app){
   $app['monolog']->addDebug('logging output.');
 
-  if($app['session']->get('user')){
+  if(!$app['session']->get('user')){
     return $app->redirect('/');
   }
 
@@ -240,6 +240,24 @@ $app->get('/single-petition/{id}', function($id) use($app){
   return $app['twig']->render('single-petition.twig', ['title'=> 'Petition : ' . $petition->title, 'petition' => $petition]);
 });
 
+//show all petitions
+$app->get('/petition-listing', function() use($app){
+  $app['monolog']->addDebug('logging output.');
+
+  // if($app['session']->get('user')){
+  //   return $app->redirect('/');
+  // }
+
+  $petitions = $app['db']->select('petition', '*');
+  if(count($petitions) < 1){
+    return $app->redirect('/');   //TODO : Redirect to 404
+  }
+
+  return $app['twig']->render('petition-listing.twig', ['title'=> 'All Petitions', 'petitions' => $petitions]);
+});
+
+
+
 $app->post('/post-petition', function(Request $request) use($app){
 
   try{
@@ -252,7 +270,9 @@ $app->post('/post-petition', function(Request $request) use($app){
     'photos' => $request->get('petition-photo'),
     'letter' => $request->get('petition-letter'),
     'recepient' => $request->get('petition-recipient-name'),
-    'recepientdesig' => $request->get('petition-recipient-designation')
+    'recepientdesig' => $request->get('petition-recipient-designation'),
+    'createdby' => $app['user']->fname.' '.$app['user']->lname,
+    'createdon' => date("F j, Y, g:i a")
   ]);
   }
   catch(Exception $er){
