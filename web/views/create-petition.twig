@@ -64,8 +64,8 @@
 			</div>
 		</div>
 	</div>
-  <span class="alert alert-warning" hidden id="signup-form-error" style="margin: 10px;font-size: 10px;padding: 10px;"></span>
-	<form action="/create-petition" id="createpetitionform" class="petition-form" method="POST" enctype="multipart/form-data">
+  <span class="alert alert-warning" hidden id="form-error" style="margin: 10px;font-size: 10px;padding: 10px;"></span>
+	<form action="#" id="createpetitionform" class="petition-form" method="POST">
 		<div class="petition-entry-details">
 			<div class="container">
 				<div class="row">
@@ -86,39 +86,30 @@
 		                                placeholder="Write about the petition in details"></textarea>
 							</div>
 						</div>
-						<div class="create_petition_section media-items" id="media-items">
-							<h3>Media Items <span>(Optional)</span></h3>
-							<div class="banner form-group" id="petitionbannerwrap">
-								<input type="file" class="form-control" id="petition-banner" />
-								<label for="petition-banner"><i class="fa fa-plus" aria-hidden="true"></i> Add Banner</label>
-							</div>
-							<div class="form-group">
-								<input type="text" placeholder="Featured video URL" id="video-url" class="form-control half" name="video-url" />
-							</div>
-							<div class="form-group">
-								<input type="text" placeholder="A headline for the video" id="video-title"   class="form-control half" name="video-title" />
-							</div>
-							<div class="form-group">
-									<textarea class="form-control" name="video-description" id="video-details"
-											  cols="30" rows="6"
-											  placeholder="Write details about the video"></textarea>
-							</div>
-							<div class="form-group text-left">
-									<span class="btn btn-success fileinput-button">       <i class="fa fa-plus"></i><span> Add Photo</span>
-										<input id="petition-media-trig" type="file"  data-maxcount="4" data-count="0" multiple="" />
-									</span>
-							</div>
-
-							<div class="row" id="petition-media-photos">
-
-							</div>
-						</div>
 					
-						<div class="create_petition_section petition-letters" id="petition-letters">
-							<h3>The Letter</h3>
 							<div class="form-group">
-                                            <textarea class="form-control" name="petition-letter" id="petition-letter"
-													  cols="30" rows="8"  placeholder="Write a letter with this petition"></textarea>
+									<input type="text" required="required" placeholder="Petition Banner" id="petition-banner"
+										class="form-control half" name="petition-banner" />
+							</div>
+							
+							<div class="form-group">
+									<textarea class="form-control" name="photo-description" id="photo-description"
+											  cols="30" rows="6"
+											  placeholder="Write details about the photos"></textarea>
+							</div>
+
+							<div class="form-group">
+									<input type="text" required="required" placeholder="Petition Photo" id="petition-photo"
+										class="form-control half" name="petition-photo" />
+							</div>
+						
+						</div>
+				<div class="col-xs-12 col-md-10 col-md-offset-1">
+					<div class="create_petition_section petition-letters" id="petition-letters">
+						<h3>The Letter</h3>
+						<div class="form-group">
+                            <textarea class="form-control" name="petition-letter" id="petition-letter"
+								cols="30" rows="6"  placeholder="Write a letter with this petition"></textarea>
 							</div>
 							<div id="petition-letters-blocks" data-count="1">
 								<div class="petition-letter-person">
@@ -126,47 +117,18 @@
 									<a href="#" class="delete-petition-letter" aria-label="Close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>
 									<div class="form-group">
 										<input type="text" required="required" placeholder="Recipient"
-											   id="petition-recipient-name-0" class="form-control half" name="petition-recipient[0][name]" />
+											   id="petition-recipient-name" class="form-control half" name="petition-recipient-name" />
 									</div>
 									<div class="form-group">
 										<input type="text" required="required" placeholder="Recipient's Designation"
-											   id="petition-recipient-designation-0" class="form-control half"
-											   name="petition-recipient[0][designation]" />
+											   id="petition-recipient-designation" class="form-control half"
+											   name="petition-recipient-designation" />
 									</div>
 								</div>
 
 							</div>
-
-							<div class="form-group text-right">
-								<a  href="#" class="btn btn-brand petition-letter-trig"><i class="fa fa-plus" aria-hidden="true"></i>
-									Add Recipient</a>
-							</div>
-
 						</div>
-						<div class="create_petition_section petition-updates" id="petition-updates">
-							<h3>Updates <span>(Optional)</span></h3>
-							<div id="petition-updates-wrap" data-count="1">
-								<div class="petition-update">
-									<a href="#" class="delete-petition-update-drag" aria-label="Close"><i class="fa fa-bars" aria-hidden="true"></i></a>
-									<a href="#" class="delete-petition-update" aria-label="Close"><i class="fa fa-times-circle-o" aria-hidden="true"></i></a>
-									<div class="form-group">
-										<input type="text"
-											   placeholder="Updates or News title" id="newsupdates-title-0"
-											   class="form-control newsupdates-title" name="newsupdates[0][title]">
-									</div>
-									<div class="form-group">
-                                                <textarea class="form-control newsupdates-text" name="newsupdates[0][text]"
-														  id="newsupdates-text-0" cols="30" rows="6"
-														  placeholder="Details about the updates"></textarea>
-									</div>
-								</div>
-							</div>
-							<div class="form-group text-right">
-								<a href="#" class="btn btn-brand petition-updates-trig"><i class="fa fa-plus"
-																						   aria-hidden="true"></i>
-									Add Updates</a>
-							</div>
-						</div>
+					 </div>
 						<div class="create_petition_section create_petition_form_action" id="create_petition_form_action">
 							<p class="text-center">
 								<button type="submit" class="btn btn-brand btn-cta" id="createpetitionBtn"> Create
@@ -187,20 +149,21 @@
 
 $('#createpetitionform').submit(function(event){
     event.preventDefault();
+	console.log($('#createpetitionform').serialize());
 
     $.ajax({
-        url : '/create-petition',
+        url : '/post-petition',
         method : 'POST',
         data : $('#createpetitionform').serialize(),
         success : function(data){
             console.log(data);
-            alert('Petition Created!!!.');
+            alert('Petition Created Sucessfully!!!.');
             window.location.replace('/');
         },
 		error : function(err){
             console.log(err.responseText);
-            $('#signup-form-error').show();
-            $('#signup-form-error').text(err.responseText);
+            $('#form-error').show();
+            $('#form-error').text(err.responseText);
         }
     })
 })

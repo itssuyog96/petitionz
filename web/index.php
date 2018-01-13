@@ -166,6 +166,16 @@ $app->get('/login', function() use($app) {
   return $app['twig']->render('login.twig', ['title' => 'Log In']);
 });
 
+$app->get('/create-petition', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+  if(!$app['session']->get('user')){
+    return $app->redirect('/login');
+  }
+
+  return $app['twig']->render('create-petition.twig', ['title' => 'Create Petition']);
+});
+
 $app->post('/checklogin', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
 
@@ -212,11 +222,27 @@ $app->get('/create-petition', function(Request $request) use($app){
   return $app['twig']->render('create-petition.twig', ['title'=> 'Create Petition']);
 });
 
-$app->post('/createpetitionform', function(Requets $request) use($app){
+$app->post('/post-petition', function(Request $request) use($app){
+
+  try{
   $app['db']->insert('petition', [
     'title' => $request->get('petition-title'),
     'description' => $request->get('petition-description'),
-    'targetsign' => $request->get('target')
+    'targetsign' => $request->get('target'),
+    'bannerimage' => $request->get('petition-banner'),
+    'imagedescription' => $request->get('photo-description'),
+    'photos' => $request->get('petition-photo'),
+    'letter' => $request->get('petition-letter'),
+    'recepient' => $request->get('petition-recipient-name'),
+    'recepientdesig' => $request->get('petition-recipient-designation')
   ]);
+  }
+  catch(Exception $er){
+     return new Response("Error occurred", 500);
+  }
+
+  return new Response("Petition created", 200);
 });
+
+
 $app->run();
