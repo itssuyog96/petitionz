@@ -282,5 +282,23 @@ $app->post('/post-petition', function(Request $request) use($app){
   return new Response("Petition created", 200);
 });
 
+//profile 
+$app->get('/profile', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+//if($app['session']->get('user')){
+  // return $app->redirect('/profile');
+// }
+
+ //$user = $app['db']->select('user', '*', ['id' => $id]);
+
+  return $app['twig']->render('profile.twig', ['title' => 'Profile']);
+});
+
+//contact
+$app->get('/contact', function() use($app) {
+  $app['monolog']->addDebug('logging output.');
+  return $app['twig']->render('contact.twig', ['title' => 'Contact Us']);
+});
 
 $app->run();

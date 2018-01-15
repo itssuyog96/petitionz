@@ -623,9 +623,9 @@ main.content{
   line-height:2.0999999999999996rem
 }
 .engagement-counter{
-  background:#fff;
-  padding-top:6rem;
-  padding-bottom:6rem;
+  background:#0f062e;
+  padding-top:2rem;
+  padding-bottom:2rem;
   text-align:center
 }
 .engagement-counter .container div .image-frame img{

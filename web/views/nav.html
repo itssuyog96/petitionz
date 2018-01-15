@@ -24,31 +24,26 @@
                       <li>
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Petitions<b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                              <li><a href="single-petition.html">Single Petition</a></li>
-                              <li><a href="create-petition.html">Create Petition</a></li>
-                              <li><a href="petition-listing.html">Petition Listing</a></li>
-                              <li><a href="petition-listing-three-col.html">Petition Listing (3 col)</a></li>
+                              <li><a href="/create-petition">Create Petition</a></li>
+                              <li><a href="/petition-listing">Petition Listing</a></li>
+                          
                           </ul>
                       </li>
-                      <li>
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Writings<b class="caret"></b></a>
-                          <ul class="dropdown-menu">
-                              <li><a href="blog-list.html">Blog Listing</a></li>
-                              <li><a href="blog-list_nohead.html">Blog Listing(Without Background Heading)</a></li>
-                              <li><a href="blog.html">Single Blog</a></li>
-                              <li><a href="blog-left-sidebar.html">Blog - Left sidebar</a></li>
-                              <li><a href="blog-right-sidebar.html">Blog - Right sidebar</a></li>
-                              <li><a href="typography.html">Typography</a></li>
-                              <li><a href="404.html">404 - Page</a></li>
-                          </ul>
-                      </li>
+                     
                       <li><a href="/contact">Contact</a></li>
-                      {% if app.user.fname is defined %}
-                        <li><a href="/logout">{{ app.user.fname }} {{ app.user.lname }} (Logout)</a></li>
-                      {% else %}
-                        <li><a href="/login">Sign In</a></li>
-                      {% endif %}
-                      
+
+                      <li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/profile">Profile</a></li>
+                        {% if app.user.fname is defined %}
+                            <li><a href="/logout">{{ app.user.fname }} {{ app.user.lname }} (Logout)</a></li>
+                        {% else %}
+                            <li><a href="/login">Sign In</a></li>
+                        {% endif %}
+                        </ul>
+                    </li>
+                    </ul>
 
                   </ul>
               </div><!-- /.navbar-collapse -->

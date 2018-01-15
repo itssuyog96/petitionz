@@ -1,0 +1,66 @@
+{% extends 'layout.html'%}
+{% block content %}
+
+
+
+<main id="main">
+    <div class="contact-section">
+        <div class="container-fluid">
+
+            <div data-lat="44.5403" data-lng="-78.5463" data-title="Title Here" data-content="Here is description" class="cbxmapcanvas" id="map_canvas" >
+            </div>
+
+            <div class="col-xs-12 col-md-6 col-sm-offset-3">
+                <div id="contact_page_wrap">
+                    <h1 class="h2 section-heading heading-no-top-margin">Visit Us</h1>
+                    <ul class="fa-ul">
+                        <li><i class="fa-li fa fa-envelope" aria-hidden="true"></i> <a href="mailto:info@codeboxr.com">petitionz@example.com</a>
+                        </li>
+                        <li><i class="fa-li fa fa-phone" aria-hidden="true"></i> <a
+                            href="tel:0088012374189">+919876543211</a></li>
+                        <li><i class="fa-li fa fa-map-marker" aria-hidden="true"></i> Address: Bharati Vidyapeeth College of Engineering.
+                        </li>
+                    </ul>
+                    <h3 class="section-heading">Say Hello</h3>
+
+                    <form name="cbx-contactform" action="#" id="cbx-contactform" class="cbx-contactform" method="POST" novalidate="novalidate">
+                        <div class="form-group">
+                            <input type="text" required data-rule-minlength="3" placeholder="Enter Your Name"
+                                   id="cbxname" class="form-control cbxname cbx-form-control"
+                                   name="cbxname"/>
+                            <label for="cbxname" class="error valid" id="cbxname-error"></label>
+                        </div>
+                        <div class="form-group">
+
+                            <input type="email" required placeholder="Enter email" id="cbxemail"
+                                   class="form-control cbxemail cbx-form-control"
+                                   name="cbxemail"/>
+                            <label for="cbxemail" class="error valid"
+                                   id="cbxemail-error"></label>
+                        </div>
+                        <div class="form-group">
+
+                            <input type="text" required data-rule-minlength="10" placeholder="Email Subject"
+                                   id="cbxsubject"
+                                   class="form-control cbxsubject cbx-form-control"
+                                   name="cbxsubject"/>
+                            <label for="cbxsubject" class="error valid"
+                                   id="cbxsubject-error"></label>
+                        </div>
+                        <div class="form-group">
+                        <textarea required data-rule-minlength="20" placeholder="Please Enter Your Text" rows="8" id="cbxmessage" name="cbxmessage"
+                                  class="form-control cbxmessage cbx-textarea-control">
+                        </textarea>
+                            <label for="cbxmessage" class="error valid"
+                                   id="cbxmessage-error"></label>
+                        </div>
+                        <button class="btn btn-block cbx-send-btn btn-cta" name="submit" type="submit">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
