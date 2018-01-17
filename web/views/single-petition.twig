@@ -52,8 +52,9 @@
                     {% endif %}
                     </div>
                 </div>
-                <div class="petition-info">
-                    <p>
+                <div class="petition-info" >
+                <h3 align="center">Description</h3>
+                    <p align="center">
                         {{petition.description}}
                     </p>
                 </div>
@@ -61,26 +62,9 @@
 
             </div>
         </div>
-        <div class="petition-media-items">
-            <div class="row petition-video-section">
-                <div class="col-xs-12 col-md-6">
-                    <div class="petition-media-video">
-                        <iframe src="https://www.youtube.com/embed/YTR21os8gTA"> </iframe>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-md-6 petition-video-info">
-                    <h4>Birds are Important</h4>
-                    <p>
-                        Vivamus eget sem sit amet eros viverra porttitor a quis lacus. Vestibulum nec dui eget lacus fermentum malesuada.
-                        Suspendisse at metus sed lectus vulputate convallis. Aliquam maximus odio non nunc tincidunt pharetra.
-                        Curabitur in eros eget tellus accumsan imperdiet eu eget enim. Sed viverra ex mattis justo venenatis, luctus fermentum mi eleifend.
-                        Nam non tortor in tellus tristique faucibus sit amet tristique risus. Maecenas in ex id quam eleifend convallis at id ante.
-                        Vestibulum ornare posuere mi, nec placerat elit imperdiet nec.
-                    </p>
-                </div>
-            </div>
-            <div class="row petition-media-photos" id="magnific-gallery">
-                <div class="col-xs-12 col-md-3">
+        
+            <div class="row petition-media-photos" id="magnific-gallery" >
+                <div align="center">
                     <a href="assets/img/bird-one.jpg">
                         <img src="{{petition.photos}}" class="petition-media-photo img-responsive" alt="bird-photo" />
                     </a>
@@ -89,10 +73,10 @@
         </div>
         <div class="row">
             <div class="recipient-area">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div >
                     <p class="recipient-heading text-center">The Letter Will be sent to:</p>
                     <div class="row">
-                        <div class="col-xs-12 col-md-4">
+                        <div >
                             <div class="recipient">
                                 <p><strong>{{petition.recepient}}</strong></p>
                                 <p>{{petition.recepientdesig}}</p>
@@ -154,7 +138,7 @@
             </div>
         </div>
         <div class="row" id="signatures_cards">
-            <div class="col-xs-12 col-sm-6 col-md-4">
+            <div>
                 <div class="sign-card">
                     <div class="thumb-photo">
                         <img src="assets/img/reporter.jpg" class="img-responsive" alt="signer-photo">
@@ -216,47 +200,7 @@
 
 </main>
 
-<!--FOOTER START-->
-<footer id="footer">
 
-<div class="container">
-<div class="row">
-    <div class="col-xs-12 col-sm-6">
-        <div class="footer-single footer-about">
-            <h2 class="title footer-logo"><a href="index-2.html"><img src="assets/img/petitionz-logo.png" alt="PetitionZ logo" class="img-responsive"/></a></h2>
-            <p>
-                Eleifend tempus eros pellentesque vehicula. Aliquam turpis justo,mattis id neque et,
-                semper lacinia purus. Vivamus dapibus tellus blandit efficitur justo lacinia eu.
-                Praesent at nibh sit amet risus dictum nec eu quam. Fusce nec nisi dui.
-            </p>
-            <ul class="list-unstyled social-area">
-                <li><a href="#" class="facebook"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="envelop"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-            </ul>
-            <p>&copy; 2017 Copyright <span>PetitionZ</span> theme. All Rights reserved. <a href="#">Codeboxr.com</a></p>
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-        <h4 class="stay_connected_title">Stay Connected</h4>
-        <div class="subscribe-form">
-            <form class="subscribe-form-action" action="#">
-                <div class="form-group subscribe-input">
-                    <input name="subscribe" id="subscribe" class="form-control cbx-input form-control" required="required" placeholder="Email Address" type="email">
-                </div>
-                <div class="form-group subscribe-btn">
-                    <button class="btn" name="subscribe-submit" type="submit">Subscribe</button>
-                </div>
-            </form>
-        </div>
-        <p>
-            Vivamus dapibus tellus blandit efficitur justo lacinia eu.
-            Praesent at nibh sit amet risus dictum nec eu quam. Fusce nec nisi dui.
-        </p>
-
-</div> <!--//.col-->
 {% endblock %}
 
 {% block scripts %}
