@@ -50,7 +50,7 @@ $.ajax({
                         '<p>Target: '+ petition.targetsign +' Signatures</p>' +
                         '<div class="progress-wrapper">' +
                             '<div class="progress small">' +
-                                '<div class="value"></div>' +
+                                '<div class="value" style="width : '+  ( petition.currentsign / petition.targetsign ).toString()  +'% !important"></div>' +
                             '</div>' +
                             '<span>'+ ( petition.currentsign / petition.targetsign ).toString() +'%</span>' +
                             '<div class="clearfix"></div>' +
