@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
+
 <div class="petition-header" style="background-image: url({{ petition.bannerimage }});">
     <div class="light-shade">
         <div class="container">
@@ -10,7 +11,7 @@
                         <div class="progress small">
                             <div class="value"></div>
                         </div>
-                        <span>67%</span>
+                        <span>{{petition.sign_percentage}}%</span>
                         <div class="clearfix"></div>
                     </div>
                     <div class="meta">
@@ -44,7 +45,11 @@
                         </p>
                     </div>
                     <div class="social text-right">
+                    {% if user is defined %}
                         <a href="#sign-this-petition" class="btn btn-brand btn-cta pull-right">Sign This</a>
+                    {% else %}
+                        <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta pull-right">Login to Sign this Petition</a>
+                    {% endif %}
                     </div>
                 </div>
                 <div class="petition-info">
@@ -188,32 +193,20 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
-                    <form id="signature-form" action="#" class="signature-form" method="POST" novalidate="novalidate">
-                        <div class="row">
-                                <label class="sr-only" for="sf-fname">First Name</label>
-                                <div class="col-md-6">
-                                <input type="text"  required data-rule-minlength="3" class="form-control"  placeholder="First Name" id="sf-fname"  name="sf-fname">
-                                </div>
-                                <label class="sr-only" for="sf-lname">Last Name</label>
-                                <div class="col-md-6">
-                                <input type="text" required data-rule-minlength="3" class="form-control"  placeholder="Last Name" id="sf-lname"  name="sf-lname">
-                                </div>
-                        </div>
-
-                        <div class="row">
-                            <label class="sr-only" for="sf-mail">Email</label>
-                            <div class="col-md-12">
-                                <input type="email" required class="form-control" placeholder="Email" id="sf-mail"  name="sf-mail">
-                            </div>
-                        </div>
+                {% if user is defined %}
+                    <form id="signatureform" action="#" class="signatureform" >
+                    <input type="hidden" name="petition_id" id="petition_id" value={{ petition.id }} />
                         <div class="row">
                             <label class="sr-only" for="detailed-updates">Comments</label>
                             <div class="col-md-12">
-                            <textarea class="form-control"  required data-rule-minlength="20" id="detailed-updates" name="sf-detailed-updates" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
+                            <textarea class="form-control"  required data-rule-minlength="5" id="detailed-updates" name="comment" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
                             </div>
                         </div>
                         <p class="text-center"> <button type="submit" class="btn btn-brand btn-cta">Sign This</button></p>
                     </form>
+                    {% else %}
+                        <p class="text-center"> <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta">Login to Sign this Petition</a> </p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -264,4 +257,29 @@
         </p>
 
 </div> <!--//.col-->
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+$('#signatureform').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url : '/sign-petition',
+        method: 'POST',
+        data : $('#signatureform').serialize(),
+        success : function(data){
+            console.log(data);
+            alert('Petition signed!');
+        },
+        error: function(error){
+            console.log("error", error.responseText);
+        }
+    })
+})
+
+</script>
+
 {% endblock %}

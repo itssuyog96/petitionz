@@ -37,6 +37,7 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 
 if($app['session']->get('user')){
   $app['user'] = $app['session']->get('user');
+  // echo "User id : ". json_encode($app['user']);
 }
 
 $app->get('/', function() use($app) {
@@ -191,6 +192,7 @@ $app->post('/checklogin', function(Request $request) use($app) {
   }
 
   $app['session']->set('user', array(
+    'uid' =>  $data[0]['uid'],
     'username' => $request->get('mail'),
     'aadhar' => $data[0]['aadhar'],
     'fname' => $data[0]['fname'],
@@ -216,8 +218,13 @@ $app->get('/logout', function() use($app) {
 $app->get('/single-petition/{id}', function($id) use($app){
   $app['monolog']->addDebug('logging output.');
 
-  if(!$app['session']->get('user')){
-    return $app->redirect('/');
+  $prepare = [];
+
+  if($app['session']->get('user')){
+    $prepare['user'] = $app['user'];
+  }
+  else{
+    $user = null;
   }
 
   $data = $app['db']->select('petition', '*', ['id' => $id]);
@@ -226,8 +233,13 @@ $app->get('/single-petition/{id}', function($id) use($app){
   }
 
   $petition = $data[0];
+  $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
 
-  return $app['twig']->render('single-petition.twig', ['title'=> 'Petition : ' . $petition->title, 'petition' => $petition]);
+
+  $prepare['title'] = 'Petition : ' . $petition['title'];
+  $prepare['petition'] = $petition;
+
+  return $app['twig']->render('single-petition.twig', $prepare);
 });
 
 //show all petitions
@@ -243,10 +255,29 @@ $app->get('/petition-listing', function() use($app){
     return $app->redirect('/');   //TODO : Redirect to 404
   }
 
-  return $app['twig']->render('petition-listing.twig', ['title'=> 'All Petitions', 'petitions' => $petitions]);
+  return $app['twig']->render('petition-listing.twig', ['title'=> 'All Petitions']);
 });
 
+$app->get('/get-petitions/{count}', function(Request $request) use($app){
+  $app['monolog']->addDebug('logging output.');
 
+  // if($app['session']->get('user')){
+  //   return $app->redirect('/');
+  // }
+    $count = $request->get('count');
+  if($count != 0){
+    $petitions = $app['db']->select('petition', '*', ['LIMIT' => $count]);
+  }
+  else{
+    $petitions = $app['db']->select('petition', '*');
+  }
+
+  if(count($petitions) < 1){
+    return new Response('No petitions', 404);
+  }
+
+  return new Response(json_encode($petitions), 200);
+});
 
 $app->post('/post-petition', function(Request $request) use($app){
 
@@ -261,7 +292,7 @@ $app->post('/post-petition', function(Request $request) use($app){
     'letter' => $request->get('petition-letter'),
     'recepient' => $request->get('petition-recipient-name'),
     'recepientdesig' => $request->get('petition-recipient-designation'),
-    'createdby' => $app['user']->fname.' '.$app['user']->lname,
+    'createdby' => $app['user']['fname'].' '.$app['user']['lname'],
     'createdon' => date("F j, Y, g:i a")
   ]);
   }
@@ -289,6 +320,33 @@ $app->get('/profile', function() use($app) {
 $app->get('/contact', function() use($app) {
   $app['monolog']->addDebug('logging output.');
   return $app['twig']->render('contact.twig', ['title' => 'Contact Us']);
+});
+
+$app->post('/sign-petition', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+  if(!$app['session']->get('user')){
+    return new Response('User not logged in', 403);
+  }
+
+  $app['db']->insert('comment', [
+    'petition_id' => $request->get('petition_id'),
+    'user_id'     => $app['user']['uid'],
+    'comment'     => $request->get('comment'),
+    'date'        => date("F j, Y, g:i a")
+  ]);
+
+  $signs = $app['db']->count('comment', [
+    'petition_id' => $request->get('petition_id')
+  ]);
+
+  $app['db']->update('petition', [
+    'currentsign' => $signs
+  ],[
+    'id' => $request->get('petition_id')
+  ]);
+
+  return new Response('Petition signed', 200);
+
 });
 
 $app->run();
