@@ -156,21 +156,22 @@ $app->get('/verify/{aadhar}/{hash}', function($aadhar, $hash) use($app) {
 });
 
 
-$app->get('/login', function() use($app) {
+$app->get('/login', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
 
+  $redirect_url = $request->query->get('redirect') != null ? $request->query->get('redirect') : '/';
   if($app['session']->get('user')){
-    return $app->redirect('/');
+    return $app->redirect($redirect_url);
   }
 
-  return $app['twig']->render('login.twig', ['title' => 'Log In']);
+  return $app['twig']->render('login.twig', ['title' => 'Log In', 'redirect' => $redirect_url]);
 });
 
 $app->get('/create-petition', function() use($app) {
   $app['monolog']->addDebug('logging output.');
 
   if(!$app['session']->get('user')){
-    return $app->redirect('/login');
+    return $app->redirect('/login?redirect=/create-petition');
   }
 
   return $app['twig']->render('create-petition.twig', ['title' => 'Create Petition']);
@@ -210,17 +211,6 @@ $app->get('/logout', function() use($app) {
   return $app->redirect('/');
 });
 
-
-
-//create petition
-$app->get('/create-petition', function(Request $request) use($app){
-  $app['monolog']->addDebug('logging output.');
-
-  if($app['session']->get('user')){
-    return $app->redirect('/');
-  }
-  return $app['twig']->render('create-petition.twig', ['title'=> 'Create Petition']);
-});
 
 //show single petition
 $app->get('/single-petition/{id}', function($id) use($app){
