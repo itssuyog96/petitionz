@@ -279,6 +279,38 @@ $app->get('/get-petitions/{count}', function(Request $request) use($app){
   return new Response(json_encode($petitions), 200);
 });
 
+$app->get('/get-comments/{petition_id}/{count}', function(Request $request) use($app){
+  $app['monolog']->addDebug('logging output.');
+
+  // if($app['session']->get('user')){
+  //   return $app->redirect('/');
+  // }
+    $count = $request->get('count');
+  if($count != 0){
+    $comments = $app['db']->select('comment', '*', ['petition_id' => $request->get('petition_id')], ['LIMIT' => $count]);
+  }
+  else{
+    $comments = $app['db']->select('comment', '*', ['petition_id' => $request->get('petition_id')]);
+  }
+
+  if(count($comments) < 1){
+    return new Response('No comments', 404);
+  }
+  $reporter = '/img/reporter.jpg';
+  $size = 60;
+  $count = 1;
+
+  foreach ($comments as &$value) {
+    $user = $app['db']->select('user', ['fname', 'lname', 'email'], ['uid' => $value['user_id']]);
+    if($user != null)
+      $value['gravatar_url'] = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user[0]['email'] ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+      $value['username'] = $user['fname'].' '.$user['lname'];
+      $value['count'] += $count++;
+  }
+
+  return new Response(json_encode($comments), 200);
+});
+
 $app->post('/post-petition', function(Request $request) use($app){
 
   try{

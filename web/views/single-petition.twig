@@ -137,23 +137,8 @@
                 <div class="h-line"></div>
             </div>
         </div>
-        <div class="row" id="signatures_cards">
-            <div>
-                <div class="sign-card">
-                    <div class="thumb-photo">
-                        <img src="assets/img/reporter.jpg" class="img-responsive" alt="signer-photo">
-                    </div>
-                    <div class="signers-info">
-                        <h5>Jane Doe</h5>
-                        <p class="date-time">02-17-2017 at 4:46 PM	<span class="pull-right">#8691</span></p>
-                        <p class="message">Etiam sed tortor augue. Aliquam erat volutpat. Etiam malesuada gravida hendrerit facilisis auctor.</p>
-
-                    </div>
-
-                </div>
-            </div>
-
-       
+        <div class="signed-petitions">
+        </div>
         </div>
 
         <div class="row">
@@ -223,6 +208,37 @@ $('#signatureform').submit(function(e){
         }
     })
 })
+
+
+    $.ajax({
+        url : '/get-comments/{{ petition.id }}/0',
+        method: 'GET',
+        success : function(data){
+            console.log(data);
+            data = JSON.parse(data);
+
+            $('.signed-petitions').append('<div class="row" id="signatures_cards">');
+            data.forEach(function(comment){
+                $('.signed-petitions .row').append(
+                '<div class="col-xs-12 col-sm-6 col-md-4">' +
+                    '<div class="sign-card">' +
+                        '<div class="thumb-photo">' +
+                            '<img src="'+ comment.gravatar_url.replace(/\\\//g, "/") +'" class="img-responsive" alt="signer-photo">' +
+                        '</div>' +
+                        '<div class="signers-info">' +
+                            '<h5>'+ comment.username +'</h5>' +
+                            '<p class="date-time">'+ comment.date +'<span class="pull-right">#'+ comment.count +'</span></p>' +
+                            '<p class="message">'+ comment.comment +'</p>' +
+                        '</div>' +
+                    '</div>'
+                );
+            })
+            $('.signed-petitions').append('</div>');
+        },
+        error: function(error){
+            console.log("error", error.responseText);
+        }
+    })
 
 </script>
 
