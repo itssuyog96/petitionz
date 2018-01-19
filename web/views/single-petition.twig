@@ -1,7 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<div class="petition-header" style="background-image: url({{ petition.bannerimage }});">
+{# <div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
+<div class="petition-header" style="background-color: gainsboro;;">
+
+
     <div class="light-shade">
         <div class="container">
             <div class="row">
@@ -144,7 +147,7 @@
         <div class="row">
             <div class="col-xs-12 text-center">
                 <p class="section_view_more">
-                    <a href="signature-list.html" class="btn btn-brand btn-cta">See All</a>
+                    <a href="/all-comments/{{petition.id}}" class="btn btn-brand btn-cta">See All</a>
                 </p>
             </div>
         </div>
@@ -228,7 +231,7 @@ $('#signatureform').submit(function(e){
                         '<div class="signers-info">' +
                             '<h5>'+ comment.username +'</h5>' +
                             '<p class="date-time">'+ comment.date +'<span class="pull-right">#'+ comment.count +'</span></p>' +
-                            '<p class="message">'+ comment.comment +'</p>' +
+                            '<p class="message">'+ comment.comment +'<span class="pull-right"><i class="fa fa-circle" style="padding-top: 10px; color:'+ (comment.score > 0 ? 'green' : (comment.score == 0 ? 'inherit' : 'red')) + ';"></i></span></p>' +
                         '</div>' +
                     '</div>'
                 );

@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "polar-oasis",
+  "private_key_id": "6fe1e532496e0b421ccb1cf1b7ec29148142470b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDDCLgGgg677gVP\neBsg8tatEQL94kPPtPcomeRBh2aLAEJ4i26twEzBSkCtKEVeCtTed2tc399LnF3b\niUmBzTPx8o2Ph/kT4Mxly5EYacaTskvbP8H7oPpk4Q36RK+hsBXMyUGqYf9MFI0k\n5nOlTYgvqOQksX4PF6oPROD6wNbPiBsY593a2leRbWIaxyT4DpVqHAn89uJaJWPp\nk/C4XIMGhHA+JPnZjSVohp259V3z+Gu9cFA/nHUN6zckaI0ajL74qaAVapSDtSUL\n/lIUuZxd72PY7rID2zaRDHDLkrmAy+UqYQA/SX4wvQR3H2xoVb8TswwnA4LQF7RV\npiPpDKwNAgMBAAECggEAAYwaee2wUg93LbStdGKWAdZCL+NE++1szVHwSGFvvMpu\nDWm34EKxUDZpeFAIbJHfLuGNnyoperbARDjnlkf3dqfJHyjFxT0OwqFjBPKQMjcj\n5m5fMxyN3b6Yh2gKaLuowFXUw0DcDrIJ68eMeRROR+8ldzmMfHBXe4Be6oWn7732\nY4td57TXhC9F6FXnUSJxSc6v+ajtRPLaC/isnrDc96IFSRPwWeG63nAQ5d8dBrOM\n7sH4NxhFQneKjmLXLUm4rHzXLIzbfT6/8Av7IQXkw1GkObGVLikS+KlvZTlHucO9\nHm1ONrtTUyrsnJ2HXr7D9e9G36TapWBbEh/by4AacQKBgQD0nLxoWyfv5GfnH8wi\nOZ36hhQRkMhvHvKLZOpn6gFoKXmbO+dV8IAewvIbh+GsSJpZ3QLdNCmVVSKbIlwK\nGDvjDVi2HgKBcxg4gDKrSoTHY5alpZ/C36DeGZc2D982GZLLU/7uyLMIqaOtElz0\nniCCKYV+FKdMAGcHqp7n/L8LewKBgQDMHR1xSmCWTNXxRhZOOywRspkuU4ztAQWG\nEV46ybiiYFJ04NAhcRilZwL0Z8Qb/hQrWHxChvE7HO/x2ud2Q9WckVsQ8rEiPB4w\nsFuN3eqHQnLhvKDcIDcpjaXZ67UnTqS6pl7ihcIxKh3E4CEmLhWjOchMS/SI2LdU\njBP4ysSsFwKBgQDNpUt8TE6KDrMPixr6FwhqivgqQFdRnGn6qM+spv2hzWSQDk+R\nX4zGz8vtO1KNncguDnGO+ICRLC7Yz40ja3ZFj33qNdaTb+iH77cpbI+udVo8Tr6+\nfXVn44nNiJB2kg9oY2hq5U4m1T9mjI6blKjt5Ox2r/RqH9h+iIHptQIEKwKBgBDI\nsBwZvpl9VfZSChGCwhvucLQjgKoYdGjS0snIvprzirQ7rEGjuCAZuV95jOG0Ydoy\nm30o9Xsj5QMhOfk6mL0YIsHhAvnKsbzVM6IVxmw65ZF0XlHbgE21bRbfT/UcfWUv\nuwurbg125h3DRFaMYZEbdkH32PLLxz93iUji+4sfAoGAfDbyziONGHhixDj20IEp\nBIjywJeAvl5LxUQYLJ6ivbEHunVFbjJB9nZy+QBsNJj5cIOOAZUsHAhxK5HbVhHX\nPQreVx65cBSCEMUnOttOzbZovpQH1ggadY/ZRkljebCwhf95y7plZZtmAMRMILwu\nLXxO52AvbQviTBPuwaBNwTA=\n-----END PRIVATE KEY-----\n",
+  "client_email": "omkar-545@polar-oasis.iam.gserviceaccount.com",
+  "client_id": "109940258712295627425",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/omkar-545%40polar-oasis.iam.gserviceaccount.com"
+}

@@ -7,6 +7,49 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Google\Cloud\Language\LanguageClient;
+use Google\Cloud\Core\ServiceBuilder;
+
+putenv('GOOGLE_APPLICATION_CREDENTIALS=apis.google.com/key/Polar-oasis-6fe1e532496e.json');
+/**
+ * Find the sentiment in text.
+ * ```
+ * analyze_sentiment('Do you know the way to San Jose?');
+ * ```
+ *
+ * @param string $text The text to analyze.
+ * @param string $projectId (optional) Your Google Cloud Project ID
+ *
+ */
+function analyze_sentiment($text, $projectId = 'polar-oasis')
+{
+    // Create the Natural Language client
+    $language = new LanguageClient([
+        'projectId' => $projectId,
+    ]);
+
+    // Call the analyzeSentiment function
+    $annotation = $language->analyzeSentiment($text);
+
+    // Print document and sentence sentiment information
+    $sentiment = $annotation->sentiment();
+    // printf('Document Sentiment:' . PHP_EOL);
+    // printf('  Magnitude: %s' . PHP_EOL, $sentiment['magnitude']);
+    // printf('  Score: %s' . PHP_EOL, $sentiment['score']);
+    // printf(PHP_EOL);
+    // foreach ($annotation->sentences() as $sentence) {
+    //     printf('Sentence: %s' . PHP_EOL, $sentence['text']['content']);
+    //     printf('Sentence Sentiment:' . PHP_EOL);
+    //     printf('  Magnitude: %s' . PHP_EOL, $sentence['sentiment']['magnitude']);
+    //     printf('  Score: %s' . PHP_EOL, $sentence['sentiment']['score']);
+    //     printf(PHP_EOL);
+    // }
+
+    return array(
+      'sentiment' => $sentiment,
+      'annotation' => $annotation
+    );
+}
 
 // Initialize
 $app = new Silex\Application();
@@ -360,11 +403,17 @@ $app->post('/sign-petition', function(Request $request) use($app) {
     return new Response('User not logged in', 403);
   }
 
+  $comment = $request->get('comment');
+  $data = analyze_sentiment($comment);
+  $sentiment = $data['sentiment'];
+
   $app['db']->insert('comment', [
     'petition_id' => $request->get('petition_id'),
     'user_id'     => $app['user']['uid'],
     'comment'     => $request->get('comment'),
-    'date'        => date("F j, Y, g:i a")
+    'date'        => date("F j, Y, g:i a"),
+    'score'       => $sentiment['score'],
+    'magnitude'       => $sentiment['magnitude']
   ]);
 
   $signs = $app['db']->count('comment', [
@@ -380,5 +429,44 @@ $app->post('/sign-petition', function(Request $request) use($app) {
   return new Response('Petition signed', 200);
 
 });
+
+$app->post('/analyze', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+  $comment = $request->get('comment');
+  $data = analyze_sentiment($comment);
+  $sentiment = $data['sentiment'];
+  $annotation = $data['annotation']->sentences();
+
+  return new Response(json_encode($sentiment), 200);
+});
+
+$app->get('/all-comments/{petition_id}', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+  $petition_id = $request->get('petition_id');
+  $prepare = [];
+
+  if($app['session']->get('user')){
+    $prepare['user'] = $app['user'];
+  }
+  else{
+    $user = null;
+  }
+
+  $data = $app['db']->select('petition', '*', ['id' => $petition_id]);
+  if(count($data) < 1){
+    return $app->redirect('/');   //TODO : Redirect to 404
+  }
+
+  $petition = $data[0];
+  $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
+
+
+  $prepare['title'] = 'All Comments : ' . $petition['title'];
+  $prepare['petition'] = $petition;
+
+  return $app['twig']->render('comments.twig', $prepare);
+  
+});
+
 
 $app->run();

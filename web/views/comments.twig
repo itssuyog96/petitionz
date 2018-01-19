@@ -1,0 +1,158 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+{# <div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
+<div class="petition-header" style="background-color: gainsboro;;">
+    <div class="light-shade">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="h1 section-heading section-heading-white">Stop Hunting, Save the birds</h2>
+                    <div class="progress-wrapper progress-wrapper-white">
+                        <div class="progress small">
+                            <div class="value"></div>
+                        </div>
+                        <span>{{petition.sign_percentage}}%</span>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="meta">
+                        <div class="signature-info pull-left">Signatures: <span>{{petition.currentsign}}</span> of <span>{{petition.targetsign}}</span></div>
+                        <ul class="list-unstyled social-area social-area-signature pull-right">
+                            <li><a href="#" class="facebook"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#" class="envelop"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="sgnature-listing-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h3 class="section-heading heading-no-top-margin">Signatures</h3>
+                <div class="h-line"></div>
+            </div>
+        </div>
+        <div class="signed-petitions">
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="sign-this-petition" id="sign-this-petition">
+    <div class="light-shade">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h3 class="section-heading heading-no-top-margin">Sign this Petition</h3>
+                    <div class="h-line"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                {% if user is defined %}
+                    <form id="signatureform" action="#" class="signatureform" >
+                    <input type="hidden" name="petition_id" id="petition_id" value={{ petition.id }} />
+                        <div class="row">
+                            <label class="sr-only" for="detailed-updates">Comments</label>
+                            <div class="col-md-12">
+                            <textarea class="form-control"  required data-rule-minlength="5" id="detailed-updates" name="comment" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
+                            </div>
+                        </div>
+                        <p class="text-center"> <button type="submit" class="btn btn-brand btn-cta">Sign This</button></p>
+                    </form>
+                    {% else %}
+                        <p class="text-center"> <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta">Login to Sign this Petition</a> </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</main>
+
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+
+$('#signatureform').submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        url : '/sign-petition',
+        method: 'POST',
+        data : $('#signatureform').serialize(),
+        success : function(data){
+            console.log(data);
+            alert('Petition signed!');
+        },
+        error: function(error){
+            console.log("error", error.responseText);
+        }
+    })
+})
+
+
+    $.ajax({
+        url : '/get-comments/{{ petition.id }}/0',
+        method: 'GET',
+        success : function(data){
+            console.log(data);
+            data = JSON.parse(data);
+
+            $('.signed-petitions').append('<div class="row" id="signatures_cards"></div>');
+            $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 positive-comments"><h3 style="color:green;">Postive Comments<h3/></div');
+            $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 negative-comments"><h3 style="color:red;">Negative Comments<h3/></div');
+            data.forEach(function(comment){
+                if(comment.score >= 0){
+                    $('.signed-petitions .row .positive-comments').append(
+                        '<div class="sign-card">' +
+                            '<div class="thumb-photo">' +
+                                '<img src="'+ comment.gravatar_url.replace(/\\\//g, "/") +'" class="img-responsive" alt="signer-photo">' +
+                            '</div>' +
+                            '<div class="signers-info">' +
+                                '<h5>'+ comment.username +'</h5>' +
+                                '<p class="date-time">'+ comment.date +'<span class="pull-right">#'+ comment.count +'</span></p>' +
+                                '<p class="message">'+ comment.comment +'<span class="pull-right"><i class="fa fa-circle" style="padding-top: 10px; color:'+ (comment.score > 0 ? 'green' : (comment.score == 0 ? 'inherit' : 'red')) + ';"></i></span></p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                }
+                else{
+                    $('.signed-petitions .row .negative-comments').append(
+                        '<div class="sign-card">' +
+                            '<div class="thumb-photo">' +
+                                '<img src="'+ comment.gravatar_url.replace(/\\\//g, "/") +'" class="img-responsive" alt="signer-photo">' +
+                            '</div>' +
+                            '<div class="signers-info">' +
+                                '<h5>'+ comment.username +'</h5>' +
+                                '<p class="date-time">'+ comment.date +'<span class="pull-right">#'+ comment.count +'</span></p>' +
+                                '<p class="message">'+ comment.comment +'<span class="pull-right"><i class="fa fa-circle" style="padding-top: 10px; color:'+ (comment.score > 0 ? 'green' : (comment.score == 0 ? 'inherit' : 'red')) + ';"></i></span></p>' +
+                            '</div>' +
+                        '</div>'
+                    );
+                }
+                
+            })
+        },
+        error: function(error){
+            console.log("error", error.responseText);
+        }
+    })
+
+</script>
+
+{% endblock %}
