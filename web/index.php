@@ -99,6 +99,20 @@ $app->get('/signup', function() use($app) {
   return $app['twig']->render('signup.twig', ['title'=> 'Sign Up']);
 });
 
+$app->get('/charts/{petition_id}', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+  if($app['session']->get('user')){
+    return $app->redirect('/');
+  }  
+  $data = $app['db']->select('petition', '*', ['id' => $request->get('petition_id')]);
+  if(count($data) < 1){
+    return new Response('Petition does not exist!!',404);
+  }
+
+  return $app['twig']->render('charts.twig', ['title'=> 'Charts', 'petition' => $data[0]]);
+});
+
 $app->post('/register', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
 
