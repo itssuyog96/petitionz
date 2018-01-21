@@ -1,6 +1,35 @@
 {% extends 'layout.html' %}
 {% block content %}
 
+<style type="text/css">
+        .chart rect {
+            fill: steelblue;
+          }
+          
+          .chart text {
+            fill: white;
+            font: 10px sans-serif;
+            text-anchor: end;
+          }
+
+          .bar {
+            fill: steelblue;
+          }
+          
+          .bar:hover {
+            fill: brown;
+          }
+          
+          .axis--x path {
+            display: none;
+          }
+          .slice text {
+            font-size: 16pt;
+            font-family: Arial;
+        }   
+</style>
+
+
 {# <div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
 <div class="petition-header" style="background-color: gainsboro;;">
     <div class="light-shade">
@@ -12,7 +41,7 @@
                         <div class="progress small">
                             <div class="value"></div>
                         </div>
-                        <span>{{petition.sign_percentage}}%</span>
+                        <span>{{(petition.sign_percentage)*100}}%</span>
                         <div class="clearfix"></div>
                     </div>
                     <div class="meta">
@@ -46,6 +75,32 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+        <div class="container">
+           
+              <h5>
+                PIE <span class="fw-semi-bold">Charts</span>
+              </h5>
+            <div id="pie" >
+            </div>
+        </div>
+</div>     
+<div class="row">
+        <div class="container">
+            <header>
+              <h5>
+                BAR <span class="fw-semi-bold">Charts</span>
+              </h5>
+            </header>
+            
+            <div id="charts" >
+                <svg width="800" height="400"></svg>
+            </div>
+        </div>
+</div> 
+
+
 
 <div class="sign-this-petition" id="sign-this-petition">
     <div class="light-shade">
@@ -85,6 +140,9 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js" ></script>
+<script src="https://d3js.org/d3.v4.js"></script>
 
 <script>
 
@@ -154,5 +212,210 @@ $('#signatureform').submit(function(e){
     })
 
 </script>
+<!--BAR CHARTS-->
+<script>
+    
+    $.ajax({
+        url : '/get-comments/{{petition.id}}/0',
+        method: 'GET',
+        success : function(data){
+            
+            data = JSON.parse(data);
+            //console.log(data)
+            var pos = 0;
+            var neg = 0;
+            var net = 0;
+
+            var s;
+            var m;
+
+           var ids = data.map(function(d){
+               return d.id;
+           })
+           var mag = data.map(function(d){
+            return d.magnitude;
+        })
+           console.log(ids,mag);
+
+            /*data = [
+            {"label":d[m], "value":d[s]},
+            {"label":d[m], "value":d[s]},
+            {"label":d[m], "value":d[s]}
+         ]*/
+            //console.log(data)
+           
+
+            
+
+            var trace1 = {
+                x: ids,
+                y: mag,
+                name: 'Positive',
+                type: 'bar'
+              };
+              
+              /*var trace2 = {
+                x: ids,
+                y: data.map(function(d){
+                    return d.label;
+                }),
+                name: 'Negative',
+                type: 'bar'
+              };
+
+              var trace3 = {
+                x: data.map(function(d){
+                    return d.value;
+                }),
+                y: data.map(function(d){
+                    return d.label;
+                }),
+                name: 'Neutral',
+                type: 'bar'
+              };*/
+              
+              var data = [trace1];
+              
+              var layout = {barmode: 'stack'};
+              
+              Plotly.newPlot('charts', data, layout);
+
+        },
+        error: function(error){
+            console.log("error", error.responseText);
+        }
+    }) 
+</script>
+
+<!--<script>
+        var svg = d3.select("svg"),
+        margin = {top: 20, right: 20, bottom: 30, left: 40},
+        width = +svg.attr("width") - margin.left - margin.right,
+        height = +svg.attr("height") - margin.top - margin.bottom;
+    
+    var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        y = d3.scaleLinear().rangeRound([height, 0]);
+    
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+    
+    $.ajax({
+        url : '/get-comments/{{petition.id}}/0',
+        method: 'GET',
+        success : function(data){
+            console.log(data);
+            data = JSON.parse(data);
+
+            //$('charts').append('<svg width="960" height="500"></svg>');
+            
+            x.domain(data.map(function(d) { return d.id; }));
+            y.domain([0, d3.max(data, function(d) { return d.magnitude; })]);
+          
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+          
+            g.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y))
+              .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .text("Magnitude");
+          
+            g.selectAll(".bar")
+              .data(data)
+              .enter().append("rect")
+                .attr("class", "bar")
+                .attr("x", function(d) { return x(d.id); })
+                .attr("y", function(d) { return y(d.magnitude); })
+                .attr("width", x.bandwidth())
+                .attr("height", function(d) { return height - y(d.magnitude); });
+         
+          function type(d) {
+              d.value = +d.value; // coerce to number
+              return d;
+            }
+        },
+        error: function(error){
+            console.log("error", error.responseText);
+        }
+    }) 
+
+
+     
+</script>-->
+
+
+
+<!--PIE CHARTS-->
+<script type="text/javascript">
+    
+     $.ajax({
+         url: '/get-comments/{{petition.id}}/0',
+         method: 'GET',
+         success: function(data){
+         
+            
+                  data = JSON.parse(data);
+                  var pos = 0;
+                  var neg = 0;
+                  var net = 0;
+                  var sum = 0;
+     
+                  data.forEach(function(d){
+                     
+                     if (d.score > 0){
+                         pos++;
+                         sum++;
+                     }
+                     if (d.score < 0){
+                         neg++;
+                         sum++;
+                     }
+                     if (d.score == 0){
+                         net++;
+                         sum++;
+                     }
+                     
+                  })
+                  
+                  data = [
+                     {"label":"Postive", "value":(pos)},
+                     {"label":"Negative", "value":(neg)},
+                     {"label":"Neutral", "value":(net)}
+                 ]   
+ 
+                
+ 
+                 var data = [{
+                     values: data.map(function(d){
+                         return d.value;
+                     }),
+                     labels: data.map(function(d){
+                         return d.label;
+                     }),
+                     type: 'pie',
+     
+                   }];
+                   
+                   var layout = {
+                     height: 350,
+                     width: 450
+                   };
+                   
+ 
+ 
+                  Plotly.newPlot('pie', data,layout);
+ 
+         } 
+     })
+
+ </script>
+ 
 
 {% endblock %}

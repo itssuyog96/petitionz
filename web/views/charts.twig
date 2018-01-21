@@ -1,0 +1,125 @@
+{% extends 'layout.html'%}
+{% block content %}
+        <style type="text/css">
+            .slice text {
+                font-size: 16pt;
+                font-family: Arial;
+            }   
+        </style>
+        <div class="row">
+                <div class="container">
+                   
+                      <h5>
+                        Reveiws <span class="fw-semi-bold">Charts</span>
+                      </h5>
+                    
+                    
+                    <div id="bars" >
+                    </div>
+                </div>
+        </div>     
+        
+
+{% endblock %}
+{% block scripts %}   
+<!-- 
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script> -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js" ></script>
+
+
+<script type="text/javascript">
+   
+    $.ajax({
+        url: '/get-comments',
+        method: 'GET',
+        success: function(data){
+        
+           
+                 data = JSON.parse(data);
+                 var pos = 0;
+                 var neg = 0;
+                 var net = 0;
+                 var sum = 0;
+                 var pet = [];
+    
+                 data.forEach(function(d){
+                    //console.log(d);
+                    if(pet[''+d.petition_id+''] == null){
+                        pet[''+d.petition_id+''] = [];
+                        pet[''+d.petition_id+'']['pos'] = 0;
+                        pet[''+d.petition_id+'']['neg'] = 0;
+                        pet[''+d.petition_id+'']['net'] = 0;
+                    }
+
+                    if (d.score > 0){
+                        pet[''+d.petition_id+'']['pos']++;
+                    }
+                    if (d.score < 0){
+                        pet[''+d.petition_id+'']['neg']++;
+
+                    }
+                    if (d.score == 0){
+                        pet[''+d.petition_id+'']['net']++;
+                    }
+                    
+                 })
+                 
+                 var x = data.map(function(d){
+                     return (d.petition_id).toString();
+                 })
+                //console.log(new Set(ids))
+                 var ids = Array.from(new Set(x));
+                
+                //console.log(pet)
+                
+                f = pet.map(function(d){
+                    return d['pos'];
+                })
+                f = f.filter(function(n){ return n != undefined });
+
+                z = pet.map(function(d){
+                    return d['neg'];
+                })
+                z = z.filter(function(n){ return n != undefined });
+
+                i = pet.map(function(d){
+                    return d['net'];
+                })
+                i = i.filter(function(n){ return n != undefined });
+                
+                //console.log(f,pet,ids)
+
+                var trace1 = {
+                    x: ids,
+                    y: f,
+                    name: 'Postive',
+                    type: 'bar'
+                  };
+                  
+                  var trace2 = {
+                    x: ids,
+                    y: z,
+                    name: 'Negative',
+                    type: 'bar'
+                  };
+
+                  var trace3 = {
+                    x: ids,
+                    y: i,
+                    name: 'Neutral',
+                    type: 'bar'
+                  };
+                  
+                  var data = [trace1, trace2, trace3];
+                  
+                  var layout = {barmode: 'stack'};
+                  
+                  Plotly.newPlot('bars', data, layout);
+        } 
+    })     
+</script>
+
+{% endblock %}
