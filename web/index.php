@@ -302,13 +302,7 @@ $app->get('/single-petition/{id}', function($id) use($app){
   $app['monolog']->addDebug('logging output.');
 
   $prepare = [];
-
-  if($app['session']->get('user')){
-    $prepare['user'] = $app['user'];
-  }
-  else{
-    $user = null;
-  }
+  
 
   $data = $app['db']->select('petition', '*', ['id' => $id]);
   if(count($data) < 1){
@@ -316,6 +310,23 @@ $app->get('/single-petition/{id}', function($id) use($app){
   }
 
   $petition = $data[0];
+
+  $petition['signed'] = FALSE;
+
+  if($app['session']->get('user')){
+    $prepare['user'] = $app['user'];
+    $signs = $app['db']->select('comment', 'id', [
+      'user_id' =>  $app['user']['uid'],
+      'petition_id' => $id
+      ]);
+      if(count($signs) > 0){
+        $petition['signed'] = TRUE;
+      }
+  }
+  else{
+    $user = null;
+  }
+
   $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
 
 
