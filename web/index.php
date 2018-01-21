@@ -277,13 +277,6 @@ $app->get('/single-petition/{id}', function($id) use($app){
 
   $prepare = [];
 
-  if($app['session']->get('user')){
-    $prepare['user'] = $app['user'];
-  }
-  else{
-    $user = null;
-  }
-
   $data = $app['db']->select('petition', '*', ['id' => $id]);
   if(count($data) < 1){
     return $app->redirect('/');   //TODO : Redirect to 404
@@ -291,7 +284,22 @@ $app->get('/single-petition/{id}', function($id) use($app){
 
   $petition = $data[0];
   $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
+  $petition['signed'] = FALSE;
 
+  if($app['session']->get('user')){
+    $prepare['user'] = $app['user'];
+    $sign = $app['db']->select('comment', 'id', [
+      'petition_id' => $petition['id'],
+      'user_id' => $app['user']['uid']
+    ]);
+
+    if(count($sign) > 0){
+      $petition['signed'] = TRUE;
+    }
+  }
+  else{
+    $user = null;
+  }
 
   $prepare['title'] = 'Petition : ' . $petition['title'];
   $prepare['petition'] = $petition;

@@ -14,7 +14,7 @@
                         <div class="progress small">
                             <div class="value"></div>
                         </div>
-                        <span>{{petition.sign_percentage}}%</span>
+                        <span>{{petition.sign_percentage * 100}}%</span>
                         <div class="clearfix"></div>
                     </div>
                     <div class="meta">
@@ -49,7 +49,11 @@
                     </div>
                     <div class="social text-right">
                     {% if user is defined %}
-                        <a href="#sign-this-petition" class="btn btn-brand btn-cta pull-right">Sign This</a>
+                        {% if petition.signed %}
+                            <a href="#" class="btn btn-success btn-cta pull-right">Already Signed</a>
+                        {% else %}
+                            <a href="#sign-this-petition" class="btn btn-brand btn-cta pull-right">Sign This</a>
+                        {% endif %}
                     {% else %}
                         <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta pull-right">Login to Sign this Petition</a>
                     {% endif %}
@@ -144,18 +148,22 @@
             <div class="row">
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
                 {% if user is defined %}
-                    <form id="signatureform" action="#" class="signatureform" >
-                    <input type="hidden" name="petition_id" id="petition_id" value={{ petition.id }} />
-                        <div class="row">
-                            <label class="sr-only" for="detailed-updates">Comments</label>
-                            <div class="col-md-12">
-                            <textarea class="form-control"  required data-rule-minlength="5" id="detailed-updates" name="comment" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
-                            </div>
-                        </div>
-                        <p class="text-center"> <button type="submit" class="btn btn-brand btn-cta">Sign This</button></p>
-                    </form>
+                        {% if petition.signed %}
+                            <a href="#" class="btn btn-success btn-cta pull-right">Already Signed</a>
+                        {% else %}
+                            <form id="signatureform" action="#" class="signatureform" >
+                            <input type="hidden" name="petition_id" id="petition_id" value={{ petition.id }} />
+                                <div class="row">
+                                    <label class="sr-only" for="detailed-updates">Comments</label>
+                                    <div class="col-md-12">
+                                    <textarea class="form-control"  required data-rule-minlength="5" id="detailed-updates" name="comment" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
+                                    </div>
+                                </div>
+                                <p class="text-center"> <button type="submit" class="btn btn-brand btn-cta">Sign This</button></p>
+                            </form>
+                        {% endif %}
                     {% else %}
-                        <p class="text-center"> <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta">Login to Sign this Petition</a> </p>
+                        <p class="text-center"><a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta pull-right">Login to Sign this Petition</a></p>
                     {% endif %}
                 </div>
             </div>
