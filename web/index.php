@@ -490,5 +490,25 @@ $app->get('/all-comments/{petition_id}', function(Request $request) use($app) {
   
 });
 
+$app->post('/analyze-all', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+  
+  $comments = $app['db']->select('comment', ['id','comment']);
+
+  foreach ($comments as $comment) {
+    $data = analyze_sentiment($comment['comment']);
+    $app['db']->update('comment', [
+      'score' => $data['sentiment']['score'],
+      'magnitude' => $data['sentiment']['magnitude']
+    ],
+    [
+      'id' => $comment['id']
+    ]);
+  }
+  
+
+  return new Response("Done! All OK!", 200);
+});
+
 
 $app->run();
