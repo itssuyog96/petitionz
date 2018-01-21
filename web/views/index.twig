@@ -29,15 +29,20 @@
  
 
 
-<div class="success-petition">
+<div class="success-petition" >
   <div class="col-xs-12">
                     <h2 class="h1 text-center section-heading">Successful Petitions</h2>
                     <p class="text-center"  style="margin:0px 80px 20px 80px; color:black;" >
 We give you the tools and community to create your own sophisticated online campaign. All you have to do is write a petition in support of your cause. We help you gather support from around the world.
                     </p>
                 </div>
-    <div class="container petition-list">
+    <div class="container petition-list" style="padding-bottom:10px;">
     
+    </div>
+    <div>
+     <p  align="center" style="padding-bottom:30px;">
+                        <a href="/petition-listing" class="btn btn-brand btn-cta">See All Petitions</a>
+    </p>
     </div>
 </div>
 
@@ -92,7 +97,7 @@ We give you the tools and community to create your own sophisticated online camp
     </div>
 
     
-<div class="success-petition">
+<div class="latest-petition" style="padding-bottom: 30px;">
   <div class="col-xs-12">
                     <h2 class="h1 text-center section-heading">Latest Petitions</h2>
                     <p class="text-center">
@@ -100,10 +105,14 @@ We give you the tools and community to create your own sophisticated online camp
                         Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
                         Lorem ipsum dolor sit amet.
                     </p>
+                    
                 </div>
-    <div class="container petition-list">
+    <div class="container petition-list" style="padding-bottom:0px;">
     
     </div>
+    <p  align="center">
+                        <a href="/petition-listing" class="btn btn-brand btn-cta">See All Petitions</a>
+    </p>
 </div>
     
 
@@ -115,7 +124,7 @@ We give you the tools and community to create your own sophisticated online camp
 <script>
 
 $.ajax({
-    url: '/get-petitions/0',
+    url: '/get-petitions/4',
     method: 'GET',
     success: function(data){
         data = JSON.parse(data);
@@ -128,13 +137,15 @@ $.ajax({
             }
 
             $('.petition-list').append(
-            '<div class="col-sm-6 col-xs-12 petition-item-box">' + 
-                '<div class="petition-item card">' +
+            '<div class="col-sm-6 col-xs-12 petition-item-box" style="margin:0px;">' + 
+                '<div class="petition-item card" style="height:500px;">' +
                     '<div class="banner">' +
                         '<a href="single-petition/'+ petition.id +'"><img src="'+ petition.bannerimage +'" alt="petition-cover"></a>' +
                     '</div>' +
                     '<div class="contents">' +
+                    '<div>'+
                         '<h2 class="h5"><a href="single-petition/'+ petition.id +'">'+ petition.title +'</a></h2>' +
+                    '</div>'+
                         '<p>Target: '+ petition.targetsign +' Signatures</p>' +
                         '<div class="progress-wrapper">' +
                             '<div class="progress small">' +
@@ -154,8 +165,9 @@ $.ajax({
                         '</div>' +
                     '</div>' +
                 '</div>' +
-            '</div>'
+            '</div>' 
             );
+
             if(count % 2 == 0){
                 $('.petition-list').append('</div>');
             }

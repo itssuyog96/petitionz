@@ -385,10 +385,11 @@ $app->get('/get-comments/{petition_id}/{count}', function(Request $request) use(
 
   foreach ($comments as &$value) {
     $user = $app['db']->select('user', ['fname', 'lname', 'email'], ['uid' => $value['user_id']]);
-    if($user != null)
-      $value['gravatar_url'] = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user[0]['email'] ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
-      $value['username'] = $user['fname'].' '.$user['lname'];
-      $value['count'] += $count++;
+    if(count($user) > 0){
+      $value['gravatar_url'] = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user[0]['email'] ) ) ) . "?d=" . urlencode( $reporter ) . "&s=" . $size;
+      $value['username'] = $user[0]['fname'].' '.$user[0]['lname'];
+      $value['count'] = $count++;
+    }
   }
 
   return new Response(json_encode($comments), 200);
@@ -497,7 +498,6 @@ $app->get('/all-comments/{petition_id}', function(Request $request) use($app) {
     return $app->redirect('/');   //TODO : Redirect to 404
   }
   
-  $data1 = $app['db']->select('comment', '*', ['id' => $comment_id]);
 
   $petition = $data[0];
   $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
@@ -506,7 +506,7 @@ $app->get('/all-comments/{petition_id}', function(Request $request) use($app) {
   $prepare['title'] = 'All Comments : ' . $petition['title'];
   $prepare['petition'] = $petition;
 
-  return $app['twig']->render('comments.twig', $prepare, $data1);
+  return $app['twig']->render('comments.twig', $prepare);
   
 });
 
