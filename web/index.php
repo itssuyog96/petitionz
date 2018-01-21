@@ -99,19 +99,45 @@ $app->get('/signup', function() use($app) {
   return $app['twig']->render('signup.twig', ['title'=> 'Sign Up']);
 });
 
-$app->get('/charts/{petition_id}', function(Request $request) use($app) {
+$app->get('/charts', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
 
   if($app['session']->get('user')){
     return $app->redirect('/');
   }  
-  $data = $app['db']->select('petition', '*', ['id' => $request->get('petition_id')]);
-  if(count($data) < 1){
-    return new Response('Petition does not exist!!',404);
+ 
+  
+
+  return $app['twig']->render('charts.twig', ['title'=> 'Charts']);
+});
+
+$app->get('/get-comments', function(Request $request) use($app){
+  $app['monolog']->addDebug('logging output.');
+
+  // if($app['session']->get('user')){
+  //   return $app->redirect('/');
+  // }
+    $comments = $app['db']->select('comment', '*');
+  
+
+  if(count($comments) < 1){
+    return new Response('No comments', 404);
+  }
+  $reporter = '/img/reporter.jpg';
+  $size = 60;
+  $count = 1;
+
+  foreach ($comments as &$value) {
+    $user = $app['db']->select('user', ['fname', 'lname', 'email'], ['uid' => $value['user_id']]);
+    if($user != null)
+      $value['gravatar_url'] = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user[0]['email'] ) ) ) . "?d=" . urlencode( $default ) . "&s=" . $size;
+      $value['username'] = $user['fname'].' '.$user['lname'];
+      $value['count'] += $count++;
   }
 
-  return $app['twig']->render('charts.twig', ['title'=> 'Charts', 'petition' => $data[0]]);
+  return new Response(json_encode($comments), 200);
 });
+
 
 $app->post('/register', function(Request $request) use($app) {
   $app['monolog']->addDebug('logging output.');
@@ -277,6 +303,13 @@ $app->get('/single-petition/{id}', function($id) use($app){
 
   $prepare = [];
 
+  if($app['session']->get('user')){
+    $prepare['user'] = $app['user'];
+  }
+  else{
+    $user = null;
+  }
+
   $data = $app['db']->select('petition', '*', ['id' => $id]);
   if(count($data) < 1){
     return $app->redirect('/');   //TODO : Redirect to 404
@@ -284,22 +317,7 @@ $app->get('/single-petition/{id}', function($id) use($app){
 
   $petition = $data[0];
   $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
-  $petition['signed'] = FALSE;
 
-  if($app['session']->get('user')){
-    $prepare['user'] = $app['user'];
-    $sign = $app['db']->select('comment', 'id', [
-      'petition_id' => $petition['id'],
-      'user_id' => $app['user']['uid']
-    ]);
-
-    if(count($sign) > 0){
-      $petition['signed'] = TRUE;
-    }
-  }
-  else{
-    $user = null;
-  }
 
   $prepare['title'] = 'Petition : ' . $petition['title'];
   $prepare['petition'] = $petition;
@@ -478,6 +496,8 @@ $app->get('/all-comments/{petition_id}', function(Request $request) use($app) {
   if(count($data) < 1){
     return $app->redirect('/');   //TODO : Redirect to 404
   }
+  
+  $data1 = $app['db']->select('comment', '*', ['id' => $comment_id]);
 
   $petition = $data[0];
   $petition['sign_percentage'] = $petition['currentsign'] / $petition['targetsign'];
@@ -486,7 +506,7 @@ $app->get('/all-comments/{petition_id}', function(Request $request) use($app) {
   $prepare['title'] = 'All Comments : ' . $petition['title'];
   $prepare['petition'] = $petition;
 
-  return $app['twig']->render('comments.twig', $prepare);
+  return $app['twig']->render('comments.twig', $prepare, $data1);
   
 });
 
