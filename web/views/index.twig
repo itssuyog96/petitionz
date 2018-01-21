@@ -1,188 +1,48 @@
 {% extends 'layout.html'%}
 {% block content %}
     
-<div class="success-petition">
-        <div class="container petition-list">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="h1 text-center section-heading">Successful Petitions</h2>
-                    <p class="text-center">
-                        Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
-                        Lorem ipsum dolor sit amet.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item card">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-one.jpg" alt="petition-cover"/></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Stop hunting, Save the birds</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>10,021 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-two.jpg" alt="petition-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Make education free for poors</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>5,630 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-three.jpg"
-                                                                alt="petition-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Decrease Travellers taxes</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>9,109 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-four.jpg" alt="petition-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Ensure a flexible work hour</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>8,127 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <p class="section_view_more">
-                        <a href="petition-listing.html" class="btn btn-brand btn-cta-n">See Latest Petition</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<span class="alert alert-warning" hidden id="signup-form-error" style="margin: 10px;font-size: 10px;padding: 10px;"></span>
-    <div class="not-alone">
+<div class="not-alone" style="background-color:#202c41; padding:0px 20px 20px 20px">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-12 col-md-6 left-part">
-                    <h2 class="h1 section-heading">You are not Alone</h2>
-                    <p>
-                        It’s the latest way to try and make a difference. You can make change simply by pressing a few buttons from the safety of your bed. 
+                <div class="banner">
+                    <h2 class="h1 text-center section-heading">You are not Alone</h2>
+                    <p style="margin:0px 200px 20px 200px; color:#e7e1e1;">
+                        It’s the latest way to try and make a difference. You can make change simply by pressing a few buttons from the safety of your bed.
                         No need to go out onto the street and protest. Posters are outdated and placards take too long to make.
                        <br>
                     </p>
-                    <p class="margin-top-4">
+
+                </div>
+
+                <div >
+
+                    <p class="margin-top-4" align="center">
                         <a href="/create-petition" class="btn btn-brand btn-cta">Create a Petition</a>
                     </p>
                 </div>
-                <div class="col-xs-12 col-md-6 right-part">
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 text-center one">
-                            <img src="/img/icons/abstract-one.png" alt="">
-                            <p>It’s the latest way to try and make a difference. You can make change simply by pressing a few buttons from the safety of your bed. 
-                            No need to go out onto the street and protest. Posters are outdated and placards take too long to make.
-                           </p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 text-center two">
-                            <img src="/img/icons/abstract-two.png" alt="">
-                            <p>Stories are incredibly powerful. They bring us closer together and heighten our sense of shared humanity.
-                             Meet the PetitionZ community in our great global storytelling. </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-6 text-center three">
-                            <img src="/img/icons/abstract-three.png" alt="">
-                            <p>PetitionZ new Community Petitions platform is supporting thousands to start and win campaigns, at the local, national, and international levels!</p>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 text-center four">
-                            <img src="/img/icons/abstract-four.png" alt="">
-                            <p>PetitionZ empowers millions of people from all walks of life to take action on pressing regional and national issues, from corruption and poverty to conflict and climate change.</p>
-                        </div>
-                    </div>
-                </div>
+
+               
             </div>
         </div>
     </div>
+
+ 
+
+
+<div class="success-petition">
+  <div class="col-xs-12">
+                    <h2 class="h1 text-center section-heading">Successful Petitions</h2>
+                    <p class="text-center"  style="margin:0px 80px 20px 80px; color:black;" >
+We give you the tools and community to create your own sophisticated online campaign. All you have to do is write a petition in support of your cause. We help you gather support from around the world.
+                    </p>
+                </div>
+    <div class="container petition-list">
+    
+    </div>
+</div>
+
+<span class="alert alert-warning" hidden id="signup-form-error" style="margin: 10px;font-size: 10px;padding: 10px;"></span>
+    
 
    
     <div class="engagement-counter">
@@ -232,111 +92,83 @@
     </div>
 
     
-
-    <div class="blog-list legendary-story">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="h1 text-center section-heading">Latest News</h2>
+<div class="success-petition">
+  <div class="col-xs-12">
+                    <h2 class="h1 text-center section-heading">Latest Petitions</h2>
                     <p class="text-center">
                         Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                         Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
                         Lorem ipsum dolor sit amet.
                     </p>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <div class="blog-item">
-                        <div class="banner">
-                            <a href="blog.html"><img src="/img/petition-one.jpg" alt="blog-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
-                                lacinia.</a></h5>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="date">
-                                    <p>25, Feb 2017</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="blog-item">
-                        <div class="banner">
-                            <a href="blog.html"><img src="/img/petition-seven.jpg" alt="blog-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
-                                lacinia.</a></h5>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="date">
-                                    <p>25, Feb 2017</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="blog-item">
-                        <div class="banner">
-                            <a href="blog.html"><img src="/img/petition-eight.jpg" alt="blog-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
-                                lacinia.</a></h5>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="date">
-                                    <p>25, Feb 2017</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="blog-item">
-                        <div class="banner">
-                            <a href="blog.html"><img src="/img/petition-seven.jpg" alt="blog-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="blog.html">Aliquam finibus pellentesque eleifend, Suspendisse
-                                lacinia.</a></h5>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo"/>
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="date">
-                                    <p>25, Feb 2017</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <p class="section_view_more"><a href="blog-list.html" class="btn btn-brand btn-cta-n">See More</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="container petition-list">
+    
     </div>
+</div>
+    
 
+   
     {% endblock %}
 
+{% block scripts %}
+
+<script>
+
+$.ajax({
+    url: '/get-petitions/0',
+    method: 'GET',
+    success: function(data){
+        data = JSON.parse(data);
+        console.log(data);
+        count = 0;
+        data.forEach(function(petition){
+            
+            if(count % 2 == 0){
+                $('.petition-list').append('<div class="row">');
+            }
+
+            $('.petition-list').append(
+            '<div class="col-sm-6 col-xs-12 petition-item-box">' + 
+                '<div class="petition-item card">' +
+                    '<div class="banner">' +
+                        '<a href="single-petition/'+ petition.id +'"><img src="'+ petition.bannerimage +'" alt="petition-cover"></a>' +
+                    '</div>' +
+                    '<div class="contents">' +
+                        '<h2 class="h5"><a href="single-petition/'+ petition.id +'">'+ petition.title +'</a></h2>' +
+                        '<p>Target: '+ petition.targetsign +' Signatures</p>' +
+                        '<div class="progress-wrapper">' +
+                            '<div class="progress small">' +
+                                '<div class="value" style="width : '+  ( petition.currentsign / petition.targetsign ).toString()  +'% !important"></div>' +
+                            '</div>' +
+                            '<span>'+ ( petition.currentsign / petition.targetsign ).toString() +'%</span>' +
+                            '<div class="clearfix"></div>' +
+                        '</div>' +
+                        '<div class="report-info">' +
+                            '<div class="reporter">' +
+                                '<img src="img/reporter.jpg" alt="reporters-photo">' +
+                                '<p>'+ petition.createdby +'</p>' +
+                            '</div>' +
+                            '<div class="date">' +
+                                '<a href="/single-petition/'+ petition.id +'#sign-this-petition" class="btn btn-sm btn-brand">Sign This<div class="ripple-container"></div></a>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>'
+            );
+            if(count % 2 == 0){
+                $('.petition-list').append('</div>');
+            }
+            count++;
+        })
+    },
+    error: function(error){
+
+    }
+})
+
+</script>
+
+{% endblock %}
 
 

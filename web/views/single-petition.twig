@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-{# <div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
-<div class="petition-header" style="background-color: gainsboro;;">
+ {#<div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
+<div class="petition-header" style="background-color: gainsboro;">
 
 
     <div class="light-shade">
@@ -58,7 +58,7 @@
                 <div class="petition-info" >
                 <h3 align="center">Description</h3>
                     <p align="center">
-                        {{petition.description}}
+                        {{petition.description | raw}}
                     </p>
                 </div>
 
@@ -98,39 +98,17 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="letter-wrapper">
+                        <h2 class="section-heading heading-no-top-margin" style="text-align:center;">Letter</h2>
+                        <div class="h-line"></div>
                     <p>
-                        {{ petition.letter }}
+                        {{ petition.letter | raw }}
                     </p>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="updates-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center update-news">
-                <h3 class="section-heading heading-no-top-margin">Updates</h3>
-                <div class="h-line"></div>
-                <div id="updates-carousel" class="owl-carousel owl-theme">
-
-                    <div class="update-news">
-                        <h5>12,304 Rescued</h5>
-                        <p>
-                            Porta convallis. Integer magna orci, consequat ac nisl vel, tristique dictum sapien. Nam iaculis sit amet sem a porttitor.
-                            Cras vestibulum tempor ligula eu vehicula. Nam sed purus augue. Donec non semper arcu.
-                        </p>
-                        <p class="reporter">
-                            John Doe, <b>Reporter</b> <br>
-                            25<sup>th</sup> Feb, 2017
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+      
 
 <div class="sgnature-listing-area">
     <div class="container">
