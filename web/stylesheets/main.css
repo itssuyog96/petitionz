@@ -552,14 +552,14 @@ main.content{
   visibility:visible
 }
 .not-alone{
-  background-color:#fff
+  background-color:#465165
 }
 .not-alone .container-fluid .row{
   display:table
 }
 .not-alone .container-fluid .row .left-part{
   text-align:right;
-  padding:11rem 6rem 15rem
+  margin:0 auto
 }
 .not-alone .container-fluid .row .right-part .row{
   position:relative;
@@ -575,14 +575,14 @@ main.content{
 .not-alone .container-fluid .row .right-part .row div.text-center p{
   color:#fff;
   font-size:1.4rem;
-  line-height:2.0999999999999996rem;
+  line-height:0rem;
   margin-bottom:0;
   margin-top:30px
 }
 .not-alone .container-fluid .row .right-part .row .one:after,.not-alone .container-fluid .row .right-part .row .two:after{
   display:block;
   content:'';
-  background:#bbb;
+  background:#465165;
   position:absolute;
   width:150%;
   height:1px;
@@ -1547,10 +1547,10 @@ footer#footer .subscribe-form .subscribe-form-action .subscribe-btn .btn:active,
   }
   .not-alone .container-fluid .row .left-part{
       padding:4rem 3rem 6rem;
-      text-align:center
+      text-align:center;
   }
   .not-alone .container-fluid .row .right-part .row .col-xs-12.four,.not-alone .container-fluid .row .right-part .row .col-xs-12.one,.not-alone .container-fluid .row .right-part .row .col-xs-12.three,.not-alone .container-fluid .row .right-part .row .col-xs-12.two{
-      padding:5rem 3rem
+      padding:1rem 1rem
   }
   .not-alone .container-fluid .row .right-part .row .one:after,.not-alone .container-fluid .row .right-part .row .two:after{
       display:none

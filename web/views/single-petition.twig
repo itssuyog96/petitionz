@@ -1,15 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-{# <div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
-<div class="petition-header" style="background-color: gainsboro;;">
+<div class="featured-listing-header" style="background-image: url({{petition.bannerimage}});">
+  
 
 
     <div class="light-shade">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="h1 section-heading section-heading-white">Stop Hunting, Save the birds</h2>
+                    <h2 class="h1 section-heading section-heading-white">{{petition.title}}</h2>
                     <div class="progress-wrapper progress-wrapper-white">
                         <div class="progress small">
                             <div class="value"></div>
@@ -59,9 +59,9 @@
                     {% endif %}
                     </div>
                 </div>
-                <div class="petition-info" >
-                <h3 align="center">Description</h3>
-                    <p align="center">
+                <div class="petition-info" style="text-align: justify; text-indent: 2em; ">
+                    <img src="{{petition.photos}}" class="petition-media-photo img-responsive" alt="bird-photo" style="float:right; margin:0px 15px 15px 15px;"/>
+                    <p  style="font-size:18px; line-height: 150%;font-weight: bold; ">
                         {{petition.description | raw}}
                     </p>
                 </div>
@@ -70,13 +70,13 @@
             </div>
         </div>
         
-            <div class="row petition-media-photos" id="magnific-gallery" >
+            {#<div class="row petition-media-photos" id="magnific-gallery" >
                 <div align="center">
                     <a href="assets/img/bird-one.jpg">
                         <img src="{{petition.photos}}" class="petition-media-photo img-responsive" alt="bird-photo" />
                     </a>
                 </div>
-            </div>
+            </div>#}
         </div>
         <div class="row">
             <div class="recipient-area">
@@ -102,6 +102,8 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="letter-wrapper">
+                        <h2 class="section-heading heading-no-top-margin" style="text-align:center;">Letter</h2>
+                        <div class="h-line"></div>
                     <p>
                         {{ petition.letter | raw }}
                     </p>
@@ -110,31 +112,7 @@
         </div>
     </div>
 </div>
-<div class="updates-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center update-news">
-                <h3 class="section-heading heading-no-top-margin">Updates</h3>
-                <div class="h-line"></div>
-                <div id="updates-carousel" class="owl-carousel owl-theme">
-
-                    <div class="update-news">
-                        <h5>12,304 Rescued</h5>
-                        <p>
-                            Porta convallis. Integer magna orci, consequat ac nisl vel, tristique dictum sapien. Nam iaculis sit amet sem a porttitor.
-                            Cras vestibulum tempor ligula eu vehicula. Nam sed purus augue. Donec non semper arcu.
-                        </p>
-                        <p class="reporter">
-                            John Doe, <b>Reporter</b> <br>
-                            25<sup>th</sup> Feb, 2017
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+      
 
 <div class="sgnature-listing-area">
     <div class="container">
