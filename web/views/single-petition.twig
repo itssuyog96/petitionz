@@ -2,8 +2,7 @@
 {% block content %}
 
 <div class="featured-listing-header" style="background-image: url({{petition.bannerimage}});">
-  
-
+ 
 
     <div class="light-shade">
         <div class="container">
@@ -14,20 +13,40 @@
                         <div class="progress small">
                             <div class="value"></div>
                         </div>
-                        <span>{{petition.sign_percentage * 100}}%</span>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="meta">
-                        <div class="signature-info pull-left">Signatures: <span>{{petition.currentsign}}</span> of <span>{{petition.targetsign}}</span></div>
-                        <ul class="list-unstyled social-area social-area-signature pull-right">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="envelop"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                        </ul>
+                         <div class="signature-info pull-left">Signatures: <span>{{petition.currentsign}}</span> of <span>{{petition.targetsign}}&nbsp;: &nbsp;</span></div>
+                        <span style="color: white;">{{petition.sign_percentage * 100}}/100%</span><br><br>
+                        <div class="signature-info pull-left" >
+                        <p class="small" style="color: white;font-size : 1.0em;">
+                            A Petition by: <b>{{petition.createdby}}</b>
+                        
+                        <br>
+                            Created on: {{petition.createdon}}
+                        </p>
+                            
+                        </div>
+                    
+                    <div class="meta-info">
 
+                    <div class="list-unstyled social-area social-area-signature pull-right">
+                    {% if user is defined %}
+                        {% if petition.signed %}
+                            <a href="#" class="btn btn-brand btn-cta">Already Signed</a>
+                        {% else %}
+                            <a href="#sign-this-petition" class="btn btn-brand btn-cta">Sign This</a>
+                        {% endif %}
+                    {% else %}
+                        <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta">Login to Sign this Petition</a>
+                    {% endif %}
                     </div>
+                </div>
+
+                    <div class="clearfix"></div>
+                    </div>
+                   
+                      
+
+
+                    
                 </div>
             </div>
         </div>
@@ -38,27 +57,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="meta-info">
-                    <div class="creatorinfo">
-                        <p class="small">
-                            A Petition by: <b>{{petition.createdby}}</b>
-                        </p>
-                        <p class="small">
-                            Created on: {{petition.createdon}}
-                        </p>
-                    </div>
-                    <div class="social text-right">
-                    {% if user is defined %}
-                        {% if petition.signed %}
-                            <a href="#" class="btn btn-success btn-cta pull-right">Already Signed</a>
-                        {% else %}
-                            <a href="#sign-this-petition" class="btn btn-brand btn-cta pull-right">Sign This</a>
-                        {% endif %}
-                    {% else %}
-                        <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta pull-right">Login to Sign this Petition</a>
-                    {% endif %}
-                    </div>
-                </div>
+
                 <div class="petition-info" style="text-align: justify; text-indent: 2em; ">
                     <img src="{{petition.photos}}" class="petition-media-photo img-responsive" alt="bird-photo" style="float:right; margin:0px 15px 15px 15px;"/>
                     <p  style="font-size:18px; line-height: 150%;font-weight: bold; ">
@@ -101,10 +100,10 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <div class="letter-wrapper">
+                <div class="letter-wrapper" >
                         <h2 class="section-heading heading-no-top-margin" style="text-align:center;">Letter</h2>
                         <div class="h-line"></div>
-                    <p>
+                     <p >
                         {{ petition.letter | raw }}
                     </p>
                 </div>
@@ -115,20 +114,23 @@
       
 
 <div class="sgnature-listing-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 text-center">
-                <h3 class="section-heading heading-no-top-margin">Signatures</h3>
-                <div class="h-line"></div>
-            </div>
-        </div>
-        <div class="signed-petitions">
-        </div>
+        <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 text-center">
+                        <h3 class="section-heading heading-no-top-margin">Signatures</h3>
+                        <div class="h-line"></div>
+                    </div>
+                </div>
+
+
+                <div class="signed-petitions">
+                </div>
+
         </div>
 
         <div class="row">
             <div class="col-xs-12 text-center">
-                <p class="section_view_more">
+                <p class="section_view_more" style="margin:10px;">
                     <a href="/all-comments/{{petition.id}}" class="btn btn-brand btn-cta">See All</a>
                 </p>
             </div>
@@ -210,7 +212,7 @@ $('#signatureform').submit(function(e){
             data.forEach(function(comment){
                 $('.signed-petitions .row').append(
                 '<div class="col-xs-12 col-sm-6 col-md-4">' +
-                    '<div class="sign-card">' +
+                    '<div class="sign-card" style="height:200px;">' +
                         '<div class="thumb-photo">' +
                             '<img src="'+ comment.gravatar_url.replace(/\\\//g, "/") +'" class="img-responsive" alt="signer-photo">' +
                         '</div>' +
