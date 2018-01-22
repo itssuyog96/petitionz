@@ -35,7 +35,11 @@
                       <li>
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User<b class="caret"></b></a>
                         <ul class="dropdown-menu">
+                        {% if app.user.fname is defined %}
                             <li><a href="/profile">Profile</a></li>
+                        {% else %}
+                        <li><a href="/login">Profile</a></li>
+                        {% endif %}   
                         {% if app.user.fname is defined %}
                             <li><a href="/logout">{{ app.user.fname }} {{ app.user.lname }} (Logout)</a></li>
                         {% else %}

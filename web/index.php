@@ -420,7 +420,8 @@ $app->post('/post-petition', function(Request $request) use($app){
     'recepient' => $request->get('petition-recipient-name'),
     'recepientdesig' => $request->get('petition-recipient-designation'),
     'createdby' => $app['user']['fname'].' '.$app['user']['lname'],
-    'createdon' => date("F j, Y, g:i a")
+    'createdon' => date("F j, Y, g:i a"),
+    'userid' => $app['user']['uid']
   ]);
   }
   catch(Exception $er){
