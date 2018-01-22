@@ -6,9 +6,9 @@
             <div class="row">
                 <div class="banner">
                     <h2 class="h1 text-center section-heading">You are not Alone</h2>
-                    <p style="margin:0px 200px 20px 200px; color:#e7e1e1;">
+                    <p style="margin:0px 200px 20px 200px; color:#e7e1e1; line-height:25px;" align="center">
                         It’s the latest way to try and make a difference. You can make change simply by pressing a few buttons from the safety of your bed.
-                        No need to go out onto the street and protest. Posters are outdated and placards take too long to make.
+                        Our Website has recorded <span class="count" style="font-weight:bold;font-size:20px;"> 10 </span> number of peitions so far click below to create your own.
                        <br>
                     </p>
 
@@ -67,7 +67,7 @@ We give you the tools and community to create your own sophisticated online camp
                     <div class="image-frame">
                         <img src="/img/icons/doc-icon.png" alt="doc-icon"/>
                     </div>
-                    <h3><span class="counter">5,501</span></h3>
+                    <h3><span class="count">5501</span></h3>
                     <p>Petitions created already<br> The count goes on</p>
 
                 </div>
@@ -75,21 +75,21 @@ We give you the tools and community to create your own sophisticated online camp
                     <div class="image-frame">
                         <img src="/img/icons/doc-pen-icon.png" alt="doc-pen-icon"/>
                     </div>
-                    <h3><span class="counter">45,501</span></h3>
+                    <h3><span class="count">45501</span></h3>
                     <p>Signatures collected on<br> all of the petitions</p>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="image-frame">
                         <img src="/img/icons/people-icon.png" alt="people-icon"/>
                     </div>
-                    <h3><span class="counter">60</span>K+</h3>
+                    <h3><span class="count">12</span></h3>
                     <p>People on site to signature<br> and discuss issues</p>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div class="image-frame">
                         <img src="/img/icons/award.png" alt="award-icon"/>
                     </div>
-                    <h3><span class="counter">12</span>+</h3>
+                    <h3><span class="count">24</span></h3>
                     <p>Government and NGO Awards<br> and a lot of socail works</p>
                 </div>
             </div>
@@ -151,7 +151,7 @@ $.ajax({
                             '<div class="progress small">' +
                                 '<div class="value" style="width : '+  ( petition.currentsign / petition.targetsign ).toString()  +'% !important"></div>' +
                             '</div>' +
-                            '<span>'+ ( petition.currentsign / petition.targetsign ).toString() +'%</span>' +
+                            '<span>'+ Math.round(((petition.currentsign / petition.targetsign)* 100 ).toString()) +'%</span>' +
                             '<div class="clearfix"></div>' +
                         '</div>' +
                         '<div class="report-info">' +
@@ -177,7 +177,21 @@ $.ajax({
     error: function(error){
 
     }
-})
+});
+
+
+$('.count').each(function () {
+    $(this).prop('Counter',0).animate({
+        Counter: $(this).text()
+    }, {
+        duration: 10000,
+        easing: 'swing',
+        step: function (now) {
+            $(this).text(Math.ceil(now));
+        }
+    });
+});
+
 
 </script>
 

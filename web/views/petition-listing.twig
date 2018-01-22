@@ -3,7 +3,7 @@
 
 <div class="featured-listing-header">
     <div class="light-shade">
-        <div class="container">
+        <div class="container" >
             <div class="row">
                 <div class="col-xs-12">
                     <h1 class="h1 section-heading section-heading-white">All Petitions</h1>
@@ -16,7 +16,7 @@
     </div>
 </div>
 
-<div class="container petition-list">
+<div class="container petition-list" >
     
 </div>
 {% endblock %}
@@ -40,7 +40,7 @@ $.ajax({
 
             $('.petition-list').append(
             '<div class="col-sm-6 col-xs-12 petition-item-box">' + 
-                '<div class="petition-item card">' +
+                '<div class="petition-item card" style="height:500px;">' +
                     '<div class="banner">' +
                         '<a href="single-petition/'+ petition.id +'"><img src="'+ petition.bannerimage +'" alt="petition-cover"></a>' +
                     '</div>' +
@@ -49,9 +49,9 @@ $.ajax({
                         '<p>Target: '+ petition.targetsign +' Signatures</p>' +
                         '<div class="progress-wrapper">' +
                             '<div class="progress small">' +
-                                '<div class="value" style="width : '+  ( petition.currentsign / petition.targetsign ).toString()  +'% !important"></div>' +
+                                '<div class="value" style="width : '+  (petition.currentsign / petition.targetsign).toString() +'% !important"></div>' +
                             '</div>' +
-                            '<span>'+ ( petition.currentsign / petition.targetsign ).toString() +'%</span>' +
+                            '<span>'+ ((petition.currentsign / petition.targetsign)* 100 ).toString() +'%</span>' +
                             '<div class="clearfix"></div>' +
                         '</div>' +
                         '<div class="report-info">' +
