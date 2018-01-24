@@ -390,14 +390,14 @@ $app->get('/get-comments/{petition_id}/{count}', function(Request $request) use(
   if(count($comments) < 1){
     return new Response('No comments', 404);
   }
-  $reporter = '/img/reporter.jpg';
+  $reporter = 'img/reporter.jpg';
   $size = 60;
   $count = 1;
 
   foreach ($comments as &$value) {
     $user = $app['db']->select('user', ['fname', 'lname', 'email'], ['uid' => $value['user_id']]);
     if(count($user) > 0){
-      $value['gravatar_url'] = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user[0]['email'] ) ) ) . "?d=" . urlencode( $reporter ) . "&s=" . $size;
+      $value['gravatar_url'] = "https://www.gravatar.com/avatar/" . md5( strtolower( trim( $user[0]['email'] ) ) ) . "?d=" . urlencode( "http://polar-oasis-15100.herokuapp.com/" . $reporter ) . "&s=" . $size;
       $value['username'] = $user[0]['fname'].' '.$user[0]['lname'];
       $value['count'] = $count++;
     }
@@ -420,9 +420,8 @@ $app->post('/post-petition', function(Request $request) use($app){
     'recepient' => $request->get('petition-recipient-name'),
     'recepientdesig' => $request->get('petition-recipient-designation'),
     'createdby' => $app['user']['fname'].' '.$app['user']['lname'],
-    'createdon' => date("F j, Y, g:i a"),
-    'userid' => $app['user']['uid']
-  ]);
+    'createdon' => date("F j, Y, g:i a")
+      ]);
   }
   catch(Exception $er){
      return new Response("Error occurred", 500);

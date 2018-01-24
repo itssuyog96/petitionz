@@ -31,30 +31,20 @@
 
 
 {# <div class="petition-header" style="background-image: url({{ petition.bannerimage }});"> #}
-<div class="petition-header" style="background-color: gainsboro;;">
+<div class="petition-header" style="background-color:#202c41 ;">
     <div class="light-shade">
         <div class="container">
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="h1 section-heading section-heading-white">Stop Hunting, Save the birds</h2>
+                    <h2 class="h1 section-heading section-heading-white" style="color:white; background:#202c41;" align="center">Citizen Reviews Analysis</h2>
                     <div class="progress-wrapper progress-wrapper-white">
                         <div class="progress small">
                             <div class="value"></div>
                         </div>
-                        <span>{{(petition.sign_percentage)*100}}%</span>
+                        
                         <div class="clearfix"></div>
                     </div>
-                    <div class="meta">
-                        <div class="signature-info pull-left">Signatures: <span>{{petition.currentsign}}</span> of <span>{{petition.targetsign}}</span></div>
-                        <ul class="list-unstyled social-area social-area-signature pull-right">
-                            <li><a href="#" class="facebook"><i class="fa fa-facebook-f" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="google-plus"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li><a href="#" class="envelop"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
-                        </ul>
 
-                    </div>
                 </div>
             </div>
         </div>
@@ -62,40 +52,40 @@
 </div>
 
 
-<div class="sgnature-listing-area">
-    <div class="container">
+<div class="sgnature-listing-area" style="padding:10px;">
+    <div class="container" >
         <div class="row">
-            <div class="col-xs-12 text-center">
+            <div class="col-xs-12 text-center" style="padding:10px;">
                 <h3 class="section-heading heading-no-top-margin">Signatures</h3>
                 <div class="h-line"></div>
             </div>
         </div>
-        <div class="signed-petitions">
+        <div class="signed-petitions" >
         </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-        <div class="container">
+<div class="row" style="margin:20px;" >
+        <div class="container" style="border-style: outset;padding:10px 50px 10px 50px;"  >
            
-              <h5>
-                PIE <span class="fw-semi-bold">Charts</span>
+              <h5 align="center">
+                PIE CHART : The Following Graph presents a graphical representation of the sentiments of the reviews posted by the citizens.
               </h5>
             <div id="pie" >
             </div>
         </div>
 </div>     
-<div class="row">
-        <div class="container">
+<div class="row" style="margin:20px;" >
+        <div class="container" style="border-style: outset;padding:10px 50px 10px 50px;" >
             <header>
               <h5>
-                BAR <span class="fw-semi-bold">Charts</span>
+               BAR GRAPH : The Following Graph presents a graphical representation of the sentiments of the reviews posted by the citizens.
               </h5>
             </header>
             
             <div id="charts" >
-                <svg width="800" height="400"></svg>
+                <!-- <svg width="800" height="400"></svg> -->
             </div>
         </div>
 </div> 
@@ -171,13 +161,13 @@ $('#signatureform').submit(function(e){
             console.log(data);
             data = JSON.parse(data);
 
-            $('.signed-petitions').append('<div class="row" id="signatures_cards"></div>');
+            $('.signed-petitions').append('<div class="row" id="signatures_cards" style="border-style: outset;padding:10px 50px 10px 50px;" ></div>');
             $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 positive-comments"><h3 style="color:green;">Postive Comments<h3/></div');
             $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 negative-comments"><h3 style="color:red;">Negative Comments<h3/></div');
             data.forEach(function(comment){
                 if(comment.score >= 0){
                     $('.signed-petitions .row .positive-comments').append(
-                        '<div class="sign-card">' +
+                        '<div class="sign-card"  style="height:180px;">' +
                             '<div class="thumb-photo">' +
                                 '<img src="'+ comment.gravatar_url.replace(/\\\//g, "/") +'" class="img-responsive" alt="signer-photo">' +
                             '</div>' +
@@ -191,7 +181,7 @@ $('#signatureform').submit(function(e){
                 }
                 else{
                     $('.signed-petitions .row .negative-comments').append(
-                        '<div class="sign-card">' +
+                        '<div class="sign-card" style="height:180px;">' +
                             '<div class="thumb-photo">' +
                                 '<img src="'+ comment.gravatar_url.replace(/\\\//g, "/") +'" class="img-responsive" alt="signer-photo">' +
                             '</div>' +
@@ -404,8 +394,8 @@ $('#signatureform').submit(function(e){
                    }];
                    
                    var layout = {
-                     height: 350,
-                     width: 450
+                     height: 600,
+                     width: 800
                    };
                    
  

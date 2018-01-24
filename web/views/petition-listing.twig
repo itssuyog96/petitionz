@@ -49,9 +49,9 @@ $.ajax({
                         '<p>Target: '+ petition.targetsign +' Signatures</p>' +
                         '<div class="progress-wrapper">' +
                             '<div class="progress small">' +
-                                '<div class="value" style="width : '+  (petition.currentsign / petition.targetsign).toString() +'% !important"></div>' +
+                                '<div class="value" style="width : '+ Math.round(((petition.currentsign / petition.targetsign)* 100 ).toString()) +'% !important"></div>' +
                             '</div>' +
-                            '<span>'+ ((petition.currentsign / petition.targetsign)* 100 ).toString() +'%</span>' +
+                            '<span>'+ Math.round(((petition.currentsign / petition.targetsign)* 100 ).toString()) +'%</span>' +
                             '<div class="clearfix"></div>' +
                         '</div>' +
                         '<div class="report-info">' +
