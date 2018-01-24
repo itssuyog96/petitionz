@@ -92,36 +92,8 @@
 
 
 
-<div class="sign-this-petition" id="sign-this-petition">
-    <div class="light-shade">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 text-center">
-                    <h3 class="section-heading heading-no-top-margin">Sign this Petition</h3>
-                    <div class="h-line"></div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">
-                {% if user is defined %}
-                    <form id="signatureform" action="#" class="signatureform" >
-                    <input type="hidden" name="petition_id" id="petition_id" value={{ petition.id }} />
-                        <div class="row">
-                            <label class="sr-only" for="detailed-updates">Comments</label>
-                            <div class="col-md-12">
-                            <textarea class="form-control"  required data-rule-minlength="5" id="detailed-updates" name="comment" cols="30" rows="6" placeholder="Why are you signing this petition ?"></textarea>
-                            </div>
-                        </div>
-                        <p class="text-center"> <button type="submit" class="btn btn-brand btn-cta">Sign This</button></p>
-                    </form>
-                    {% else %}
-                        <p class="text-center"> <a href="/login?redirect=/single-petition/{{petition.id}}#sign-this-petition" class="btn btn-brand btn-cta">Login to Sign this Petition</a> </p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
+
 
 
 </main>
@@ -162,7 +134,7 @@ $('#signatureform').submit(function(e){
             data = JSON.parse(data);
 
             $('.signed-petitions').append('<div class="row" id="signatures_cards" style="border-style: outset;padding:10px 50px 10px 50px;" ></div>');
-            $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 positive-comments"><h3 style="color:green;">Postive Comments<h3/></div');
+            $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 positive-comments"><h3 style="color:green;">Postive/Neutral Comments<h3/></div');
             $('.signed-petitions .row').append('<div class="col-xs-6 col-sm-6 col-md-6 negative-comments"><h3 style="color:red;">Negative Comments<h3/></div');
             data.forEach(function(comment){
                 if(comment.score >= 0){
