@@ -19,6 +19,7 @@ $ heroku open
 or
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fitssuyog96%2Fpetitionz.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fitssuyog96%2Fpetitionz?ref=badge_shield)
 
 ## Documentation
 
@@ -26,3 +27,7 @@ For more information about using PHP on Heroku, see these Dev Center articles:
 
 - [Getting Started with PHP on Heroku](https://devcenter.heroku.com/articles/getting-started-with-php)
 - [PHP on Heroku](https://devcenter.heroku.com/categories/php)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fitssuyog96%2Fpetitionz.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fitssuyog96%2Fpetitionz?ref=badge_large)
