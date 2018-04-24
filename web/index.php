@@ -373,12 +373,37 @@ $app->get('/get-petitions/{count}', function(Request $request) use($app){
   return new Response(json_encode($petitions), 200);
 });
 
+$app->get('/get-successfull-petitions', function(Request $request) use($app){
+  $app['monolog']->addDebug('logging output.');
+
+  // if($app['session']->get('user')){
+  //   return $app->redirect('/');
+  // }
+    
+  $petitionsx = $app['db']->select('petition', '*');
+  $petitions = [];
+
+  for($i = 0; $i < count($petitionsx); $i++){
+    if($petitionsx[$i]['targetsign'] <= $petitionsx[$i]['currentsign']){
+      array_push($petitions, $petitionsx[$i]);
+    }
+  }
+
+  if(count($petitions) < 1){
+    return new Response('No petitions', 404);
+  }
+
+  return new Response(json_encode($petitions), 200);
+});
+
+
 $app->get('/get-comments/{petition_id}/{count}', function(Request $request) use($app){
   $app['monolog']->addDebug('logging output.');
 
   // if($app['session']->get('user')){
   //   return $app->redirect('/');
   // }
+
     $count = $request->get('count');
   if($count != 0){
     $comments = $app['db']->select('comment', '*', ['petition_id' => $request->get('petition_id')], ['LIMIT' => $count]);
@@ -442,6 +467,37 @@ $app->get('/profile', function() use($app) {
 
   return $app['twig']->render('profile.twig', ['title' => 'Profile']);
 });
+
+
+//profile stats
+$app->get('/profile-stats/{id}/signed', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+  $id = $request->get('id');
+  $signs = $app['db']->select('comment', '*', ['id' => $id]);
+
+  for($i = 0; $i < count($signs); $i++){
+    $title = $app['db']->select('petition', ['title'], [
+      'id' => $signs[$i]['petition_id']
+    ]);
+
+    $signs[$i]['title'] = $title[0]['title'];
+  }
+
+  return new Response(json_encode($signs), 200);
+});
+
+//profile stats
+$app->get('/profile-stats/{id}/created', function(Request $request) use($app) {
+  $app['monolog']->addDebug('logging output.');
+
+  $id = $request->get('id');
+
+  $user = $app['db']->select('petition', ['title', 'createdon', 'currentsign', 'targetsign'], ['id' => $id]);
+
+  return new Response(json_encode($user), 200);
+});
+
 
 //contact
 $app->get('/contact', function() use($app) {

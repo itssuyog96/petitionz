@@ -12,128 +12,22 @@
                              <h6 class="h6 text-center section-heading">{{app.user.username}}</h6>
                    
                     <h2 class="h1 text-center section-heading">Signed Petitions</h2>
-                    <p class="text-center">
-                        Aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Etiam id facilisis enim, sed mattis magna. Aliquam erat volutpat. <br>
-                        Lorem ipsum dolor sit amet.
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item card">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-one.jpg" alt="petition-cover"/></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Stop hunting, Save the birds</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
 
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>10,021 Signed</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="signed-petition">
+            
                     </div>
+                    
                 </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-two.jpg" alt="petition-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Make education free for poors</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>5,630 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
 
-            <div class="row">
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-three.jpg"
-                                                                alt="petition-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Decrease Travellers taxes</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>9,109 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-xs-12">
-                    <div class="petition-item">
-                        <div class="banner">
-                            <a href="single-petition.html"><img src="/img/petition-four.jpg" alt="petition-cover"></a>
-                        </div>
-                        <div class="contents">
-                            <h5 class="title"><a href="single-petition.html">Ensure a flexible work hour</a></h5>
-                            <p>Target: 10,021 Signatures</p>
-                            <div class="progress-wrapper">
-                                <div class="progress small">
-                                    <div class="value"></div>
-                                </div>
-                                <span>67%</span>
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="report-info">
-                                <div class="reporter">
-                                    <img src="/img/reporter.jpg" alt="reporters-photo">
-                                    <p>Jane Doe</p>
-                                </div>
-                                <div class="signature-count">
-                                    <p>8,127 Signed</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h2 class="h1 text-center section-heading">Created Petitions</h2>
+            <div class="started-petition">
+            
             </div>
+            
+
 
         </div>
     </div>
@@ -270,6 +164,53 @@
         </div>
     </div>
 
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $.ajax({
+        url: '/profile-stats/{{app.user.uid}}/signed',
+        method: 'GET',
+        success: function(data){
+            console.log(data);
+           $('.signed-petition').append('<div class="row"><ul></ul></div>');
+            data = JSON.parse(data);
+            data.forEach(petition => {
+                if(petition.comment == ''){
+                    $('.signed-petition .row ul').append(
+                            '<li>Signed the Petition <strong>'+ petition.id +'</strong> on <strong>'+ petition.date +'</strong>.</li>.'
+
+                    );
+                }
+                else{
+                    $('.signed-petition .row ul').append(
+                            '<li>Signed the Petition <strong>'+ petition.title +'</strong> on <strong>'+ petition.date +'</strong> and commented <strong>'+ petition.comment +'</strong>.</li>.'
+
+                    );
+                }
+            });
+
+            console.log(data);
+        }
+    })
+
+    $.ajax({
+        url: '/profile-stats/{{app.user.uid}}/created',
+        method: 'GET',
+        success: function(data){
+            console.log(data);
+           $('.started-petition').append('<div class="row"><ul></ul></div>');
+            data = JSON.parse(data);
+            data.forEach(petition => {
+                $('.started-petition .row ul').append(
+                    '<li>Created new Petition <strong>'+ petition.title +'</strong> on <strong>'+ petition.createdon +'</strong>. ['+ petition.currentsign +'/'+ petition.targetsign +']</li>.'
+                )
+            })
+        }
+    })
+</script>
 
 {% endblock %}
 
